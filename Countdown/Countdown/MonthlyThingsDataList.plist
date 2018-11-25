@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Thing</key>
+	<array>
+		<string>用水量</string>
+		<string>用电量</string>
+	</array>
+	<key>Amount</key>
+	<array>
+		<integer>35</integer>
+		<integer>134</integer>
+	</array>
+</dict>
+</plist>

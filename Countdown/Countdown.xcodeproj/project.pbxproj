@@ -7,15 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		183B06D421AABA3000200825 /* TodayTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183B06D321AABA3000200825 /* TodayTableViewController.swift */; };
+		183B06D621AAD13100200825 /* SimpleCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183B06D521AAD13100200825 /* SimpleCellItem.swift */; };
+		183B06D821AAD84800200825 /* MonthlyThingsDataList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 183B06D721AAD84800200825 /* MonthlyThingsDataList.plist */; };
 		18431C8921A5905D00D00AC7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18431C8821A5905D00D00AC7 /* AppDelegate.swift */; };
 		18431C8B21A5905D00D00AC7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18431C8A21A5905D00D00AC7 /* ViewController.swift */; };
 		18431C8E21A5905E00D00AC7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18431C8C21A5905E00D00AC7 /* Main.storyboard */; };
 		18431C9021A5906500D00AC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18431C8F21A5906500D00AC7 /* Assets.xcassets */; };
 		18431C9321A5906500D00AC7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18431C9121A5906500D00AC7 /* LaunchScreen.storyboard */; };
-		18431C9D21A59CF100D00AC7 /* TadayListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18431C9C21A59CF100D00AC7 /* TadayListTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		183B06D321AABA3000200825 /* TodayTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTableViewController.swift; sourceTree = "<group>"; };
+		183B06D521AAD13100200825 /* SimpleCellItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCellItem.swift; sourceTree = "<group>"; };
+		183B06D721AAD84800200825 /* MonthlyThingsDataList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MonthlyThingsDataList.plist; sourceTree = "<group>"; };
 		18431C8521A5905D00D00AC7 /* Countdown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Countdown.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18431C8821A5905D00D00AC7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18431C8A21A5905D00D00AC7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -23,7 +28,6 @@
 		18431C8F21A5906500D00AC7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18431C9221A5906500D00AC7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18431C9421A5906500D00AC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		18431C9C21A59CF100D00AC7 /* TadayListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TadayListTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,13 +60,15 @@
 		18431C8721A5905D00D00AC7 /* Countdown */ = {
 			isa = PBXGroup;
 			children = (
+				183B06D321AABA3000200825 /* TodayTableViewController.swift */,
 				18431C8821A5905D00D00AC7 /* AppDelegate.swift */,
 				18431C8A21A5905D00D00AC7 /* ViewController.swift */,
-				18431C9C21A59CF100D00AC7 /* TadayListTableViewController.swift */,
 				18431C8C21A5905E00D00AC7 /* Main.storyboard */,
 				18431C8F21A5906500D00AC7 /* Assets.xcassets */,
 				18431C9121A5906500D00AC7 /* LaunchScreen.storyboard */,
 				18431C9421A5906500D00AC7 /* Info.plist */,
+				183B06D521AAD13100200825 /* SimpleCellItem.swift */,
+				183B06D721AAD84800200825 /* MonthlyThingsDataList.plist */,
 			);
 			path = Countdown;
 			sourceTree = "<group>";
@@ -128,6 +134,7 @@
 				18431C9321A5906500D00AC7 /* LaunchScreen.storyboard in Resources */,
 				18431C9021A5906500D00AC7 /* Assets.xcassets in Resources */,
 				18431C8E21A5905E00D00AC7 /* Main.storyboard in Resources */,
+				183B06D821AAD84800200825 /* MonthlyThingsDataList.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,9 +145,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				183B06D621AAD13100200825 /* SimpleCellItem.swift in Sources */,
 				18431C8B21A5905D00D00AC7 /* ViewController.swift in Sources */,
 				18431C8921A5905D00D00AC7 /* AppDelegate.swift in Sources */,
-				18431C9D21A59CF100D00AC7 /* TadayListTableViewController.swift in Sources */,
+				183B06D421AABA3000200825 /* TodayTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
