@@ -18,6 +18,8 @@ class TodayTableViewController: UITableViewController {
     
     var amountData:[Float32]
     
+    var tipData:[String]
+    
     //init the monthly things
     required init?(coder aDecoder: NSCoder) {
         items = [SimpleCellItem]()
@@ -42,10 +44,24 @@ class TodayTableViewController: UITableViewController {
         
         amountData = dict!.object(forKey: "Amount") as! [Float32]
         
+        tipData = dict!.object(forKey: "Tip") as! [String]
+        
         super.init(coder: aDecoder)
     }
     
+    
+    
     override func viewDidLoad() {
+        let path = Bundle.main.path(forResource:"MonthlyThingsDataList",ofType:"plist")
+        
+        let dict = NSDictionary(contentsOfFile: path!)
+        
+        thingData = dict!.object(forKey: "Thing") as! [String]
+        
+        amountData = dict!.object(forKey: "Amount") as! [Float32]
+        
+        tipData = dict!.object(forKey: "Tip") as! [String]
+        
         super.viewDidLoad()
 
         
@@ -85,9 +101,70 @@ class TodayTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        alert(currentRow: indexPath)
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+    //弹出框，来修改数据
+    func alert (currentRow cRow: IndexPath){
+        let currentTip = tipData[cRow.row]
+        
+        let alertController = UIAlertController(title: currentTip, message: " ", preferredStyle: .alert)
+        
+        alertController.addTextField { (textField:UITextField) -> Void in
+            textField.placeholder = "请输入..."
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        let confirmAction = UIAlertAction (title: "Confirm", style: .default) { (action) in
+            let amount = alertController.textFields![0]
+            
+            self.refresh(currentRow: cRow, amount: ((amount.text)! as NSString).floatValue)
+            
+        }
+        
+        alertController.addAction(cancelAction)
+        
+        alertController.addAction(confirmAction)
+        
+        self.present(alertController,animated: true,completion: nil)
+    }
+    
+    //MARK:- 创建或向已存在的plist文件写数据
+    func updatePlist(searchPathDirectory:FileManager.SearchPathDirectory,fileName:String,infoDic:NSDictionary)
+    {
+        let searchPath = NSSearchPathForDirectoriesInDomains(searchPathDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        let plistPath = searchPath[0] + "/" + fileName + ".plist"
+        if !FileManager.default.fileExists(atPath: plistPath)
+        {
+            FileManager.default.createFile(atPath: plistPath, contents: nil, attributes: nil)
+        }
+        infoDic.write(toFile: plistPath, atomically: true)
+    }
+    
+    
+    //更新所有数据 with bug
+    func refresh(currentRow cRow:IndexPath,amount toChange:Float)
+    {
+        let path = Bundle.main.path(forResource:"MonthlyThingsDataList",ofType:"plist")
+        
+        let dict = NSDictionary(contentsOfFile: path!)
+        
+        amountData[cRow.row] = toChange
+        
+        let dicString = dict?.allKeys as! [String]
+        
+        dict?.setValue(amountData, forKey: "Amount")
+        
+        dict?.write(toFile: path!, atomically: true)
+        
+        self.tableView.reloadData()
+        
+        self.refreshControl?.endRefreshing()
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

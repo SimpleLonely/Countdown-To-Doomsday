@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tvz-G5-MSY">
-    <device id="retina3_5" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -14,7 +14,7 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Countdown" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前全球平均温度偏差" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UOp-xH-9ck">
@@ -33,20 +33,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vk9-Cd-292">
-                                <rect key="frame" x="129" y="352" width="62" height="30"/>
+                                <rect key="frame" x="129" y="380" width="62" height="30"/>
                                 <state key="normal" title="今日贡献"/>
                                 <connections>
                                     <segue destination="QoY-A8-VA6" kind="show" id="DWt-yG-pSr"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="倒计时" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JtB-OV-DfJ">
-                                <rect key="frame" x="118" y="222" width="87" height="34"/>
+                                <rect key="frame" x="118" y="250" width="87" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20年" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFW-BO-Ime">
-                                <rect key="frame" x="135" y="274" width="49" height="27"/>
+                                <rect key="frame" x="135" y="302" width="49" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -58,7 +58,7 @@
                             <constraint firstItem="JtB-OV-DfJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="1.5" id="Aw1-oc-eYS"/>
                             <constraint firstItem="hFW-BO-Ime" firstAttribute="top" secondItem="JtB-OV-DfJ" secondAttribute="bottom" constant="18" id="BcD-La-bSV"/>
                             <constraint firstItem="hFW-BO-Ime" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Dv2-kD-L9I"/>
-                            <constraint firstAttribute="bottom" secondItem="JtB-OV-DfJ" secondAttribute="bottom" constant="224" id="QBd-3P-h2x"/>
+                            <constraint firstAttribute="bottom" secondItem="JtB-OV-DfJ" secondAttribute="bottom" constant="284" id="QBd-3P-h2x"/>
                             <constraint firstItem="rDX-Mm-c93" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XN2-GV-feC"/>
                             <constraint firstItem="JtB-OV-DfJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="118" id="fpj-ty-4j7"/>
                             <constraint firstItem="UOp-xH-9ck" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hXT-cl-J4a"/>
@@ -80,7 +80,7 @@
             <objects>
                 <tableViewController id="Zs9-cq-tdf" customClass="TodayTableViewController" customModule="Countdown" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="H7c-pK-hVK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>

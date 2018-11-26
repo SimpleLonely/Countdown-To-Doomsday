@@ -2,6 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Tip</key>
+	<array>
+		<string>请输入本月用水量</string>
+		<string>请输入本月用电量</string>
+	</array>
 	<key>Thing</key>
 	<array>
 		<string>用水量</string>
