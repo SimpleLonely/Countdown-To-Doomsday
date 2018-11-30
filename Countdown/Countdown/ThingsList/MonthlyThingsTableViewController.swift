@@ -8,11 +8,10 @@
 
 import UIKit
 
-
+@IBDesignable
 class TodayTableViewController: UITableViewController {
 
     //Declare the monthly things
-    var items: [SimpleCellItem]
     
     var thingData:[String]
     
@@ -22,19 +21,6 @@ class TodayTableViewController: UITableViewController {
     
     //init the monthly things
     required init?(coder aDecoder: NSCoder) {
-        items = [SimpleCellItem]()
-        
-        let row0 = SimpleCellItem()
-        row0.name = "用水量"
-        row0.amount = "35L"
-        row0.tip = "本月的用水量是："
-        items.append(row0)
-        
-        let row1 = SimpleCellItem()
-        row1.name = "用电量"
-        row1.amount = "35度"
-        row1.tip = "本月的用电量是："
-        items.append(row1)
         
         let path = Bundle.main.path(forResource:"MonthlyThingsDataList",ofType:"plist")
         
@@ -82,7 +68,7 @@ class TodayTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return items.count
+        return thingData.count
     }
 
     
@@ -91,11 +77,11 @@ class TodayTableViewController: UITableViewController {
 
         //let item = items[indexPath.row]
         
-        let label1 = cell.viewWithTag(1) as! UILabel
-        label1.text = thingData[indexPath.row]
+        let label1 = cell.textLabel
+        label1?.text = thingData[indexPath.row]
         
-        let label2 = cell.viewWithTag(2) as! UILabel
-        label2.text = String (amountData[indexPath.row])
+        let label2 = cell.detailTextLabel
+        label2?.text = String (amountData[indexPath.row])
         
         return cell
     }
@@ -148,17 +134,17 @@ class TodayTableViewController: UITableViewController {
     //更新所有数据 with bug
     func refresh(currentRow cRow:IndexPath,amount toChange:Float)
     {
-        let path = Bundle.main.path(forResource:"MonthlyThingsDataList",ofType:"plist")
+        // let path = Bundle.main.path(forResource:"MonthlyThingsDataList",ofType:"plist")
         
-        let dict = NSDictionary(contentsOfFile: path!)
+        // let dict = NSDictionary(contentsOfFile: path!)
         
         amountData[cRow.row] = toChange
         
-        let dicString = dict?.allKeys as! [String]
+        // let dicString = dict?.allKeys as! [String]
         
-        dict?.setValue(amountData, forKey: "Amount")
+        // dict?.setValue(amountData, forKey: "Amount")
         
-        dict?.write(toFile: path!, atomically: true)
+        // dict?.write(toFile: path!, atomically: true)
         
         self.tableView.reloadData()
         
