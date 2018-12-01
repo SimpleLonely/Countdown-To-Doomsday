@@ -12,10 +12,26 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    var monthlyThingsPlistPathInDocument:String = String()
+    
+    func prepareMonthlyThingsPlistForUse(){
+        // 1
+        let rootPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, .userDomainMask, true)[0]
+        // 2
+        monthlyThingsPlistPathInDocument = rootPath.appendingFormat("/MonthlyThingsDataList.plist")
+        if !FileManager.default.fileExists(atPath: monthlyThingsPlistPathInDocument){
+            let plistPathInBundle = Bundle.main.path(forResource: "MonthlyThingsDataList", ofType: "plist")
+            // 3
+            do {
+                try FileManager.default.copyItem(atPath: plistPathInBundle!, toPath: monthlyThingsPlistPathInDocument)
+            }catch{
+                print("Error occurred while copying file to document \(error)")
+            }
+        }
+    }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        self.prepareMonthlyThingsPlistForUse()
         return true
     }
 
@@ -35,6 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        self.prepareMonthlyThingsPlistForUse()
+        
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

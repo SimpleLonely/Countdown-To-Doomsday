@@ -13,14 +13,18 @@ class TodayTableViewController: UITableViewController {
 
     //Declare the monthly things
     
-    var thingData:[String]
+    var thingData:[String] = []
     
-    var amountData:[Float32]
+    var amountData:[Float32] = []
     
-    var tipData:[String]
+    var tipData:[String] = []
+    
+    var dict:NSDictionary!
+    var notesArray:NSMutableArray!
+    var plistPath:String!
     
     //init the monthly things
-    required init?(coder aDecoder: NSCoder) {
+    /*required init?(coder aDecoder: NSCoder) {
         
         let path = Bundle.main.path(forResource:"MonthlyThingsDataList",ofType:"plist")
         
@@ -31,14 +35,14 @@ class TodayTableViewController: UITableViewController {
         amountData = dict!.object(forKey: "Amount") as! [Float32]
         
         tipData = dict!.object(forKey: "Tip") as! [String]
-        
+ 
         super.init(coder: aDecoder)
-    }
+    }*/
     
     
     
     override func viewDidLoad() {
-        let path = Bundle.main.path(forResource:"MonthlyThingsDataList",ofType:"plist")
+        /*let path = Bundle.main.path(forResource:"MonthlyThingsDataList",ofType:"plist")
         
         let dict = NSDictionary(contentsOfFile: path!)
         
@@ -47,7 +51,7 @@ class TodayTableViewController: UITableViewController {
         amountData = dict!.object(forKey: "Amount") as! [Float32]
         
         tipData = dict!.object(forKey: "Tip") as! [String]
-        
+        */
         super.viewDidLoad()
 
         
@@ -59,6 +63,30 @@ class TodayTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        plistPath = appDelegate.monthlyThingsPlistPathInDocument
+        // Extract the content of the file as NSData
+        dict = NSDictionary(contentsOfFile: plistPath!)
+        
+        thingData = dict!.object(forKey: "Thing") as! [String]
+        
+        amountData = dict!.object(forKey: "Amount") as! [Float32]
+        
+        tipData = dict!.object(forKey: "Tip") as! [String]
+        
+        //let data:NSData =  FileManager.default.contents(atPath: plistPath)! as NSData
+        /*do{
+            notesArray = try PropertyListSerialization.propertyList(from: data as Data, options: PropertyListSerialization.MutabilityOptions.mutableContainersAndLeaves, format: nil) as? NSMutableArray
+            
+        }catch{
+            print("Error occured while reading from the plist file")
+        }
+         */
+        self.tableView.reloadData()
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -68,6 +96,8 @@ class TodayTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        //let firstArray = notesArray.object(at: 0) as! Array<String>
+        //return firstArray.count
         return thingData.count
     }
 
@@ -77,11 +107,14 @@ class TodayTableViewController: UITableViewController {
 
         //let item = items[indexPath.row]
         
-        let label1 = cell.textLabel
-        label1?.text = thingData[indexPath.row]
+        //let label1 = cell.textLabel
+        //label1?.text = thingData[indexPath.row]
         
-        let label2 = cell.detailTextLabel
-        label2?.text = String (amountData[indexPath.row])
+        //let label2 = cell.detailTextLabel
+        //label2?.text = String (amountData[indexPath.row])
+        //let firstArray = notesArray.object(at: 0) as! Array<String>
+        cell.textLabel!.text = thingData[indexPath.row]
+        cell.detailTextLabel!.text = String(amountData[indexPath.row])
         
         return cell
     }
@@ -105,6 +138,7 @@ class TodayTableViewController: UITableViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         let confirmAction = UIAlertAction (title: "Confirm", style: .default) { (action) in
+            
             let amount = alertController.textFields![0]
             
             self.refresh(currentRow: cRow, amount: ((amount.text)! as NSString).floatValue)
@@ -116,18 +150,7 @@ class TodayTableViewController: UITableViewController {
         alertController.addAction(confirmAction)
         
         self.present(alertController,animated: true,completion: nil)
-    }
-    
-    //MARK:- 创建或向已存在的plist文件写数据
-    func updatePlist(searchPathDirectory:FileManager.SearchPathDirectory,fileName:String,infoDic:NSDictionary)
-    {
-        let searchPath = NSSearchPathForDirectoriesInDomains(searchPathDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
-        let plistPath = searchPath[0] + "/" + fileName + ".plist"
-        if !FileManager.default.fileExists(atPath: plistPath)
-        {
-            FileManager.default.createFile(atPath: plistPath, contents: nil, attributes: nil)
-        }
-        infoDic.write(toFile: plistPath, atomically: true)
+        
     }
     
     
@@ -142,9 +165,9 @@ class TodayTableViewController: UITableViewController {
         
         // let dicString = dict?.allKeys as! [String]
         
-        // dict?.setValue(amountData, forKey: "Amount")
+        dict?.setValue(amountData, forKey: "Amount")
         
-        // dict?.write(toFile: path!, atomically: true)
+        dict?.write(toFile: plistPath!, atomically: true)
         
         self.tableView.reloadData()
         
