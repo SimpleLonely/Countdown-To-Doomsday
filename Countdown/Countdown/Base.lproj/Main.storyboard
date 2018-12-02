@@ -364,15 +364,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <switch opaque="NO" tag="2" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="right" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="GJk-63-0t0">
-                                            <rect key="frame" x="271" y="6.5" width="51" height="30.5"/>
-                                        </switch>
                                     </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="GJk-63-0t0" secondAttribute="trailing" constant="4" id="e8a-Fd-09o"/>
-                                        <constraint firstItem="GJk-63-0t0" firstAttribute="centerY" secondItem="Od7-d2-MAa" secondAttribute="centerY" id="jLP-oz-LBe"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="GJk-63-0t0" secondAttribute="bottom" constant="-4" id="kgt-Bg-p2P"/>
-                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>

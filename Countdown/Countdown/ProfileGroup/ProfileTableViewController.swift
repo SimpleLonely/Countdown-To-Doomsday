@@ -12,7 +12,7 @@ class ProfileTableViewController: UITableViewController {
 
     @IBOutlet weak var myHeadhot: UIImageView!
     
-    let name:[String] = ["历史贡献","我的设备"]
+    let name:[String] = ["历史贡献","初始档案"]
     
     @IBOutlet weak var nickName: UILabel!
     
@@ -47,8 +47,8 @@ class ProfileTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "OneLable", for: indexPath)
 
         // Configure the cell...
-        let label = cell.viewWithTag(1) as! UILabel
-        label.text = name[indexPath.row]
+        let label = cell.textLabel
+        label!.text = name[indexPath.row]
         
         return cell
     }

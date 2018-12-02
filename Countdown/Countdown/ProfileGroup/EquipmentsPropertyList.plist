@@ -2,12 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Data</key>
+	<string></string>
 	<key>Equipments</key>
 	<array>
-		<string>洗衣机</string>
-		<string>空调</string>
-		<string>暖风机</string>
-		<string>汽车每公里排放量</string>
+		<string>洗衣机能源等级</string>
+		<string>空调能源等级</string>
+		<string>灯泡种类</string>
+		<string>厕所水箱升数</string>
+		<string>上月用水量</string>
+		<string>上月用电量</string>
+		<string>上月私家车里程数</string>
+		<string>上月回收废品量</string>
 	</array>
 </dict>
 </plist>

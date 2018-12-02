@@ -19,7 +19,7 @@ class TodayTableViewController: UITableViewController {
     
     var tipData:[String] = []
     
-    var dict:NSDictionary!
+    var dict:NSMutableDictionary!
     
     var notesArray:NSMutableArray!
     
@@ -43,7 +43,7 @@ class TodayTableViewController: UITableViewController {
         
         plistPath = appDelegate.monthlyThingsPlistPathInDocument
         
-        dict = NSDictionary(contentsOfFile: plistPath!)
+        dict = NSMutableDictionary(contentsOfFile: plistPath!)
         
         thingData = dict!.object(forKey: "Thing") as! [String]
         
