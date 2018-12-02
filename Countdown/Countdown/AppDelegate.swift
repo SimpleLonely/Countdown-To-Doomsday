@@ -12,7 +12,10 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
     var monthlyThingsPlistPathInDocument:String = String()
+    
+    var dailyThingsPlistPathInDocument:String = String()
     
     func prepareMonthlyThingsPlistForUse(){
         // 1
@@ -29,9 +32,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    func prepareDailyThingsPlistForUse(){
+        // 1
+        let rootPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, .userDomainMask, true)[0]
+        // 2
+        dailyThingsPlistPathInDocument = rootPath.appendingFormat("/DailyhingsDataList.plist")
+        if !FileManager.default.fileExists(atPath: dailyThingsPlistPathInDocument){
+            let plistPathInBundle = Bundle.main.path(forResource: "DailyThingsDataList", ofType: "plist")
+            // 3
+            do {
+                try FileManager.default.copyItem(atPath: plistPathInBundle!, toPath: dailyThingsPlistPathInDocument)
+            }catch{
+                print("Error occurred while copying file to document \(error)")
+            }
+        }
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         self.prepareMonthlyThingsPlistForUse()
+        self.prepareDailyThingsPlistForUse()
         return true
     }
 
@@ -52,6 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         self.prepareMonthlyThingsPlistForUse()
+        self.prepareDailyThingsPlistForUse()
         
     }
 

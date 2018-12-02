@@ -10,6 +10,26 @@ import UIKit
 
 class DailyTableViewController: UITableViewController {
 
+    var questions:[String] = []
+    
+    var answers:[String] = []
+    
+    var dict:NSDictionary!
+    
+    var plistPath:String!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        plistPath = appDelegate.dailyThingsPlistPathInDocument
+        
+        dict = NSDictionary(contentsOfFile: plistPath!)
+        
+        questions = dict!.object(forKey: "quetions") as! [String]
+        
+        answers = dict!.object(forKey: "answers") as! [String]
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,23 +44,34 @@ class DailyTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 3
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return questions.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DailyThings", for: indexPath)
 
-        // Configure the cell...
-
+        cell.textLabel?.text = questions[indexPath.row]
+        
+        let answer =  cell.viewWithTag(2) as! UISwitch
+        
+        let currentAnswer = answers[indexPath.row]
+        
+        if (currentAnswer == "Y"){
+            answer.setOn(true,animated: true)
+        }
+        else{
+            answer.setOn(false, animated: true)
+        }
+        
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

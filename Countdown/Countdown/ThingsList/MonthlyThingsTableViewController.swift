@@ -20,41 +20,15 @@ class TodayTableViewController: UITableViewController {
     var tipData:[String] = []
     
     var dict:NSDictionary!
+    
     var notesArray:NSMutableArray!
+    
     var plistPath:String!
     
-    //init the monthly things
-    /*required init?(coder aDecoder: NSCoder) {
-        
-        let path = Bundle.main.path(forResource:"MonthlyThingsDataList",ofType:"plist")
-        
-        let dict = NSDictionary(contentsOfFile: path!)
-        
-        thingData = dict!.object(forKey: "Thing") as! [String]
-        
-        amountData = dict!.object(forKey: "Amount") as! [Float32]
-        
-        tipData = dict!.object(forKey: "Tip") as! [String]
- 
-        super.init(coder: aDecoder)
-    }*/
-    
-    
-    
     override func viewDidLoad() {
-        /*let path = Bundle.main.path(forResource:"MonthlyThingsDataList",ofType:"plist")
         
-        let dict = NSDictionary(contentsOfFile: path!)
-        
-        thingData = dict!.object(forKey: "Thing") as! [String]
-        
-        amountData = dict!.object(forKey: "Amount") as! [Float32]
-        
-        tipData = dict!.object(forKey: "Tip") as! [String]
-        */
         super.viewDidLoad()
 
-        
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -68,7 +42,7 @@ class TodayTableViewController: UITableViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         plistPath = appDelegate.monthlyThingsPlistPathInDocument
-        // Extract the content of the file as NSData
+        
         dict = NSDictionary(contentsOfFile: plistPath!)
         
         thingData = dict!.object(forKey: "Thing") as! [String]
@@ -77,14 +51,6 @@ class TodayTableViewController: UITableViewController {
         
         tipData = dict!.object(forKey: "Tip") as! [String]
         
-        //let data:NSData =  FileManager.default.contents(atPath: plistPath)! as NSData
-        /*do{
-            notesArray = try PropertyListSerialization.propertyList(from: data as Data, options: PropertyListSerialization.MutabilityOptions.mutableContainersAndLeaves, format: nil) as? NSMutableArray
-            
-        }catch{
-            print("Error occured while reading from the plist file")
-        }
-         */
         self.tableView.reloadData()
     }
     // MARK: - Table view data source
@@ -154,7 +120,7 @@ class TodayTableViewController: UITableViewController {
     }
     
     
-    //更新所有数据 with bug
+    //更新所有数据
     func refresh(currentRow cRow:IndexPath,amount toChange:Float)
     {
         // let path = Bundle.main.path(forResource:"MonthlyThingsDataList",ofType:"plist")
