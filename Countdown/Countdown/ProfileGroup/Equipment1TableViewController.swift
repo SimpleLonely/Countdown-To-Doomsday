@@ -8,17 +8,23 @@
 
 import UIKit
 
+protocol levelDelegte : NSObjectProtocol{
+    //在协议里面，声明许多方法
+    // 第一个，改变标题
+    func refresh(level:Int,indexPath:IndexPath)
+    
+}
+
 class Equipment1TableViewController: UITableViewController {
 
-    var data:[String]
-    required init?(coder aDecoder: NSCoder) {
+    var data:[String] = []
     
-        data = ["一级","二级","三级","四级","五级"]
-        
-        super.init(coder: aDecoder)
-    }
+    var delegate:levelDelegte?
+    
+    var currentIndexPath:IndexPath?
+    
     override func viewDidLoad() {
-        data = ["一级","二级","三级","四级","五级"]
+        data = ["没有该设备","一级","二级","三级","四级","五级"]
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
@@ -49,7 +55,13 @@ class Equipment1TableViewController: UITableViewController {
         return cell
     }
     
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        delegate!.refresh(level:indexPath.row,indexPath: currentIndexPath!)
+        
+        self.navigationController?.popViewController(animated: true)
+        
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

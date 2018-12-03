@@ -61,7 +61,7 @@ class HistoryTableViewController: UITableViewController {
         var values = [BarChartDataEntry]()
         for i in 0..<count{
             //设置数据
-            let value = arc4random_uniform(40)+50
+            let value = data[i]
             let entry = BarChartDataEntry(x:Double(i),y:Double(value))
             values.append(entry)
         }
@@ -69,9 +69,9 @@ class HistoryTableViewController: UITableViewController {
         let set = BarChartDataSet(values: values, label: "prec")
         set.barBorderWidth = 0
         
-        let data = BarChartData(dataSet: set)
-        data.setDrawValues(true)
-        barChartView.data=data
+        let datas = BarChartData(dataSet: set)
+        datas.setDrawValues(true)
+        barChartView.data=datas
         
     }
     

@@ -1,85 +1,77 @@
 //
-//  MyEquipmentsTableViewController.swift
+//  Equipment2TableViewController.swift
 //  Countdown
 //
-//  Created by mac on 11/29/18.
+//  Created by mac on 12/3/18.
 //  Copyright © 2018 nju. All rights reserved.
 //
 
 import UIKit
 
-@IBDesignable
-class MyEquipmentsTableViewController: UITableViewController {
+protocol typeDelegte : NSObjectProtocol{
+    //在协议里面，声明许多方法
+    // 第一个，改变标题
+    func refresh(type:String,indexPath:IndexPath)
+    
+}
 
-    //Declare the monthly things
-    
-    var eData:[String]
+class Equipment2TableViewController: UITableViewController {
 
+    var data:[String] = []
     
+    var delegate2:typeDelegte!
     
-    //init the monthly things
-    required init?(coder aDecoder: NSCoder) {
-        let path = Bundle.main.path(forResource:"EquipmentsPropertyList",ofType:"plist")
-        
-        let dict = NSDictionary(contentsOfFile: path!)
-        
-        eData = dict!.object(forKey: "Equipments") as! [String]
-        
-        super.init(coder: aDecoder)
-    }
+    var currentIndexPath:IndexPath?
+    
     override func viewDidLoad() {
-        let path = Bundle.main.path(forResource:"EquipmentsPropertyList",ofType:"plist")
-        
-        let dict = NSDictionary(contentsOfFile: path!)
-        
-        eData = dict!.object(forKey: "Equipments") as! [String]
-        
+        data = ["没有该设备","LED","白炽灯"]
         super.viewDidLoad()
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return eData.count
+        return data.count
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "EquipCell", for: indexPath)
-
-        let label = cell.textLabel
-        label!.text = eData[indexPath.row]
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "typeCell", for: indexPath)
         
+        let label = cell.textLabel
+        label?.text = data[indexPath.row]
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //拿到storyBoard
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        //拿到ViewController
-        let equipmentPage = storyBoard.instantiateViewController(withIdentifier:"Equipment1") as! Equipment1TableViewController
-        //传值
-        equipmentPage.title? = eData[indexPath.row]
-        //跳转
-        self.navigationController?.pushViewController(equipmentPage, animated: true)
-
-        tableView.deselectRow(at: indexPath, animated: true)
+        delegate2!.refresh(type:data[indexPath.row],indexPath: currentIndexPath!)
+        
+        self.navigationController?.popViewController(animated: true)
+        
     }
+    /*
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+
+        // Configure the cell...
+
+        return cell
+    }
+    */
+
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

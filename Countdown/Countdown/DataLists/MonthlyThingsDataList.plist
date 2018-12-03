@@ -6,16 +6,28 @@
 	<array>
 		<string>请输入本月用水量</string>
 		<string>请输入本月用电量</string>
+		<string>请输入本月私家车里程数</string>
+		<string>请输入回收废纸量</string>
+		<string>请输入回收废旧塑料量</string>
+		<string>请输入回收废金属量</string>
 	</array>
 	<key>Thing</key>
 	<array>
 		<string>用水量</string>
 		<string>用电量</string>
+		<string>私家车里程数</string>
+		<string>回收废纸</string>
+		<string>回收废旧塑料</string>
+		<string>回收废金属</string>
 	</array>
 	<key>Amount</key>
 	<array>
 		<integer>35</integer>
 		<integer>134</integer>
+		<integer>123</integer>
+		<integer>1</integer>
+		<integer>0</integer>
+		<integer>0</integer>
 	</array>
 </dict>
 </plist>

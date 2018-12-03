@@ -33,7 +33,7 @@ class DailyTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-s
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -78,12 +78,12 @@ s
     }
     
     @objc func switchChanged(_ sender : UISwitch!) -> Void {
-        print("table row switch Changed \(sender.tag)")
+        //print("table row switch Changed \(sender.tag)")
         //print("The switch is \(sender.isOn ? "ON" : "OFF")")
         
         answers[sender.tag] = (sender.isOn ? "Y":"N")
         
-        print (answers[sender.tag])
+        //print (answers[sender.tag])
         
         dict?.setValue(answers, forKey: "answers")
         

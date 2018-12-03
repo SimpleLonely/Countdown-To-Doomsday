@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Data</key>
-	<string></string>
 	<key>Equipments</key>
 	<array>
 		<string>洗衣机能源等级</string>
@@ -14,6 +12,19 @@
 		<string>上月用电量</string>
 		<string>上月私家车里程数</string>
 		<string>上月回收废品量</string>
+		<string>上月使用一次性物品量</string>
+	</array>
+	<key>Data</key>
+	<array>
+		<string>0</string>
+		<string>0</string>
+		<string>0</string>
+		<string>0</string>
+		<string>0</string>
+		<string>0</string>
+		<string>0</string>
+		<string>0</string>
+		<string>0</string>
 	</array>
 </dict>
 </plist>

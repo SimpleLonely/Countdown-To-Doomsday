@@ -58,7 +58,7 @@ class ProfileTableViewController: UITableViewController {
         //拿到storyBoard
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         //拿到ViewController
-        let equipmentsPage = storyBoard.instantiateViewController(withIdentifier:"MyEquipments") as! MyEquipmentsTableViewController
+        let equipmentsPage = storyBoard.instantiateViewController(withIdentifier:"MyEquipments") as! InitialDocTableViewController
         //传值
         // nextPage.id = joinUsDataArray[indexPath.row].id
         // nextPage.titleOfNavi.title = joinUsDataArray[indexPath.row].title

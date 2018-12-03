@@ -17,56 +17,73 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Hyi-uf-b5Z">
+                                <rect key="frame" x="62" y="203" width="196" height="198"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="198" id="MgK-pq-0EA"/>
+                                    <constraint firstAttribute="width" constant="196" id="d1q-DH-fx3"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前全球平均温度偏差" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UOp-xH-9ck">
-                                <rect key="frame" x="71" y="99" width="178" height="21"/>
+                                <rect key="frame" x="38.5" y="99" width="243.5" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="175" id="MJ8-qE-Iwj"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="倒计时" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JtB-OV-DfJ">
+                                <rect key="frame" x="109.5" y="264" width="101" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="93" id="Ww1-BU-IC1"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="101" id="XVT-gg-IYb"/>
+                                    <constraint firstAttribute="height" constant="40" id="gAt-jL-RBV"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="39" id="i57-d1-0cM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="20年" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFW-BO-Ime">
+                                <rect key="frame" x="135.5" y="307.5" width="49" height="26.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+0.32度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rDX-Mm-c93">
-                                <rect key="frame" x="129" y="145" width="62" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="116" y="145" width="88.5" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vk9-Cd-292">
-                                <rect key="frame" x="129" y="380" width="62" height="30"/>
+                                <rect key="frame" x="117" y="439" width="86" height="38"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="今日贡献"/>
                                 <connections>
                                     <segue destination="QoY-A8-VA6" kind="show" id="DWt-yG-pSr"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="倒计时" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JtB-OV-DfJ">
-                                <rect key="frame" x="118" y="250" width="87" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20年" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFW-BO-Ime">
-                                <rect key="frame" x="135.5" y="302" width="49" height="27"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="UOp-xH-9ck" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1IW-7K-xIg"/>
-                            <constraint firstItem="Vk9-Cd-292" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="AsB-Wj-mPE"/>
-                            <constraint firstItem="hFW-BO-Ime" firstAttribute="top" secondItem="JtB-OV-DfJ" secondAttribute="bottom" constant="18" id="BcD-La-bSV"/>
-                            <constraint firstItem="hFW-BO-Ime" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Dv2-kD-L9I"/>
-                            <constraint firstAttribute="bottom" secondItem="JtB-OV-DfJ" secondAttribute="bottom" constant="284" id="QBd-3P-h2x"/>
-                            <constraint firstItem="JtB-OV-DfJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="R7o-2w-f03"/>
-                            <constraint firstItem="rDX-Mm-c93" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XN2-GV-feC"/>
-                            <constraint firstItem="JtB-OV-DfJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="118" id="fpj-ty-4j7"/>
-                            <constraint firstItem="UOp-xH-9ck" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hXT-cl-J4a"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UOp-xH-9ck" secondAttribute="trailing" constant="71" id="hr2-WL-du6"/>
-                            <constraint firstItem="UOp-xH-9ck" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="35" id="ilf-sd-c0M"/>
-                            <constraint firstItem="Vk9-Cd-292" firstAttribute="top" secondItem="hFW-BO-Ime" secondAttribute="bottom" constant="51" id="jzx-2D-DjY"/>
-                            <constraint firstItem="rDX-Mm-c93" firstAttribute="top" secondItem="UOp-xH-9ck" secondAttribute="bottom" constant="25" id="utz-Uo-CLi"/>
+                            <constraint firstItem="JtB-OV-DfJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0Lo-LP-wf2"/>
+                            <constraint firstItem="UOp-xH-9ck" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6l6-Wv-ps6"/>
+                            <constraint firstItem="Hyi-uf-b5Z" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="J4P-vL-IPQ"/>
+                            <constraint firstItem="Hyi-uf-b5Z" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="18" id="KiI-Jz-t7C"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="hFW-BO-Ime" secondAttribute="bottom" constant="217" id="M7z-66-Aw2"/>
+                            <constraint firstItem="Hyi-uf-b5Z" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Sn8-eI-ust"/>
+                            <constraint firstItem="hFW-BO-Ime" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Sz6-Fw-bnP"/>
+                            <constraint firstItem="hFW-BO-Ime" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="V6z-3Z-fl2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Vk9-Cd-292" secondAttribute="bottom" constant="91" id="XbP-Xt-cvK"/>
+                            <constraint firstItem="JtB-OV-DfJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="biD-dM-dkk"/>
+                            <constraint firstItem="hFW-BO-Ime" firstAttribute="top" secondItem="JtB-OV-DfJ" secondAttribute="bottom" constant="3.5" id="jnB-k5-x16"/>
+                            <constraint firstItem="Vk9-Cd-292" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lkE-3O-B4g"/>
+                            <constraint firstItem="rDX-Mm-c93" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mEk-aP-PDM"/>
+                            <constraint firstItem="Hyi-uf-b5Z" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="18" id="mlZ-QC-1XU"/>
+                            <constraint firstItem="rDX-Mm-c93" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="81" id="odD-mm-DXi"/>
+                            <constraint firstItem="UOp-xH-9ck" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="35" id="vn2-vL-2Ga"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -200,10 +217,10 @@
             </objects>
             <point key="canvasLocation" x="-786" y="-638"/>
         </scene>
-        <!--My Equipments Table View Controller-->
+        <!--Initial Doc Table View Controller-->
         <scene sceneID="X3Q-uN-khF">
             <objects>
-                <tableViewController storyboardIdentifier="MyEquipments" id="K9C-P2-Wpa" customClass="MyEquipmentsTableViewController" customModule="Countdown" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MyEquipments" id="K9C-P2-Wpa" customClass="InitialDocTableViewController" customModule="Countdown" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="YEY-XO-kfj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -379,6 +396,34 @@
             </objects>
             <point key="canvasLocation" x="3041" y="474"/>
         </scene>
+        <!--Equipment2 Table View Controller-->
+        <scene sceneID="PSO-rQ-vkw">
+            <objects>
+                <tableViewController storyboardIdentifier="Equipment2" id="jZF-iA-rvQ" customClass="Equipment2TableViewController" customModule="Countdown" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="toq-b0-u74">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="typeCell" id="gAk-1u-8fe">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gAk-1u-8fe" id="lMl-co-oh4">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="jZF-iA-rvQ" id="r2j-YZ-371"/>
+                            <outlet property="delegate" destination="jZF-iA-rvQ" id="guN-1X-67t"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="trK-KH-Rld" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-802" y="-268"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ohc-H9-IZE">
             <objects>
@@ -418,6 +463,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="circle-icon" width="296" height="300"/>
         <image name="headshot" width="229" height="220"/>
         <image name="moon" width="30" height="30"/>
         <image name="sun" width="30" height="30"/>
