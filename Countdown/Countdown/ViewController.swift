@@ -14,35 +14,61 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentT: UILabel!
     @IBOutlet weak var countDown: UILabel!
     
-    var dict:NSMutableDictionary!
+    var initialDataPlistPath:String!
     
-    var notesArray:NSMutableArray!
+    var monthlyPlistPath:String!
     
-    var plistPath:String!
+    var dailyPlistPath:String!
+    
+    var initialData:NSMutableDictionary!
+    
+    var monthlyData:NSMutableDictionary!
+    
+    var dailyData:NSMutableDictionary!
     
     let M_e = 2.71828182845904523536028747135266250
+
     
-    var Q:Double = 0.0
+    override func viewWillAppear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        initialDataPlistPath = appDelegate.initialDocPath
+        
+        
+        monthlyPlistPath = appDelegate.monthlyThingsPlistPathInDocument
+        
+        dailyPlistPath = appDelegate.dailyThingsPlistPathInDocument
+        
+        initialData = NSMutableDictionary(contentsOfFile: initialDataPlistPath!)
+        
+        monthlyData = NSMutableDictionary(contentsOfFile: monthlyPlistPath!)
+        
+        dailyData = NSMutableDictionary(contentsOfFile: dailyPlistPath!)
+        
+        
+    }
     
-    var n:Double = 0
-    
-    
-    var t12:Double = 0
-    
-    var tou:Double = 0.0
     
     override func viewDidLoad() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
-        plistPath = appDelegate.initialDocPath
+        initialDataPlistPath = appDelegate.initialDocPath
         
-        dict = NSMutableDictionary(contentsOfFile: plistPath)
+        monthlyPlistPath = appDelegate.monthlyThingsPlistPathInDocument
         
-        let tempString = dict!.object(forKey: "Equipments") as! [String]
-
+        dailyPlistPath = appDelegate.dailyThingsPlistPathInDocument
         
-        currentT.text = String(dT(2018.0))
+        initialData = NSMutableDictionary(contentsOfFile: initialDataPlistPath!)
         
+        monthlyData = NSMutableDictionary(contentsOfFile: monthlyPlistPath!)
+        
+        dailyData = NSMutableDictionary(contentsOfFile: dailyPlistPath!)
+        
+        currentT.text = "+0.35摄氏度"
+        
+        print (dT(2018.0))
+        
+        countDown.text = String(Int((1.5/(0.65-(0.35-dT(2018.0)))*10)*365))+"天"
         
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -54,12 +80,12 @@ class ViewController: UIViewController {
     }
 
     func E(_ _t:Double) -> Double {
-        let P_coal = P(Q: 1.5*pow(10.0,12.0), n: 1.05,  t12: 2061, tou: 43.43, t: _t)
-        print ("coal"+String(P_coal))
-        let P_oil = P(Q: 2*pow(10.0, 12.0), n: 2.826, t12: 2005, tou: 13.37, t: _t)
-        print ("oil"+String(P_oil))
-        let P_gas = P(Q: 15*pow(10.0, 15.0), n: 7.125, t12: 2056, tou: 13.97, t: _t)
-        print ("gas"+String(P_gas))
+        let P_coal = P(Q: 1.5*pow(10.0,12.0), n: 1.05,  t12: 2061, tou: 43.43, t: _t)/1000000
+        //print ("coal"+String(P_coal))
+        let P_oil = P(Q: 2*pow(10.0, 12.0), n: 2.826, t12: 2005, tou: 13.37, t: _t)/1000000000
+        //print ("oil"+String(P_oil))
+        let P_gas = P(Q: 15*pow(10.0, 15.0), n: 7.125, t12: 2056, tou: 13.97, t: _t)/1000000000000
+        //print ("gas"+String(P_gas))
         let p_total = P_coal*0.907*0.5*0.75 + P_oil*0.136*0.84*0.75 + P_gas*0.0189*0.76*0.75
         print("pTotal:"+String(p_total))
         return p_total
@@ -77,22 +103,36 @@ class ViewController: UIViewController {
     }
     func C(_ tn:Double,_ delt:Double) -> Double{
         
-        let c = 0.47*(ETotal(tn,1700)-delt)
+        let c = 0.47*(E(tn)-delt)
         
         return c
     }
     
     func reduceCarbon() -> Double {
-        return 0
+        
+        let carBeforeString = initialData.object(forKey: "Data") as! [String]
+        let carBefore = (carBeforeString[7] as NSString).floatValue
+        let carAfterString = monthlyData.object(forKey: "Amount") as! [Float]
+        let carAfter = carAfterString[2]
+        let oilPerMile = (carBeforeString[4] as NSString).floatValue
+        
+        let carReduce = (carBefore-carAfter)*oilPerMile*0.785 * 0.7
+        
+        
+        
+        return Double(carReduce)
+       
+        
     }
     
     func dT(_ tn:Double) -> Double{
         let k = 3.0/log(2)
-        let C1700 = C(1700,0)
-        print("C1700:"+String(C1700))
-        let Cnow = C(tn, reduceCarbon())
+        let Cnow = C(tn, reduceCarbon())*0.278
         print("Cnow:"+String(Cnow))
         return k*(log(Cnow/280))
     }
+    
+    
+    
 }
 

@@ -66,14 +66,16 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
         titles[1].append(tempString[2])
         
         titles[2].append(tempString[3])
-        
-        titles[3].append(tempString[4])
+        titles[2].append(tempString[4])
         
         titles[3].append(tempString[5])
         titles[3].append(tempString[6])
+        titles[3].append(tempString[7])
         
-        titles[4].append(tempString[7])
         titles[4].append(tempString[8])
+        titles[4].append(tempString[9])
+        titles[4].append(tempString[10])
+        titles[4].append(tempString[11])
         
         let tempDetails = dict!.object(forKey: "Data") as! [String]
         
@@ -83,14 +85,16 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
         details[1].append(tempDetails[2])
         
         details[2].append(tempDetails[3])
+        details[2].append(tempDetails[4])
         
-        details[3].append(tempDetails[4])
         details[3].append(tempDetails[5])
         details[3].append(tempDetails[6])
+        details[3].append(tempDetails[7])
         
-        details[4].append(tempDetails[7])
         details[4].append(tempDetails[8])
-        
+        details[4].append(tempDetails[9])
+        details[4].append(tempDetails[10])
+        details[4].append(tempDetails[11])
     }
     
     func refresh(level: Int, indexPath: IndexPath) {
@@ -222,6 +226,8 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
         else{
             alert(currentRow: indexPath)
         }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     //弹出框，来修改数据
     func alert (currentRow cRow: IndexPath){

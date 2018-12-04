@@ -25,7 +25,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前全球平均温度偏差" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UOp-xH-9ck">
-                                <rect key="frame" x="38.5" y="99" width="243.5" height="29"/>
+                                <rect key="frame" x="38.5" y="99" width="243" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="175" id="MJ8-qE-Iwj"/>
                                 </constraints>
@@ -52,7 +52,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+0.32度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rDX-Mm-c93">
-                                <rect key="frame" x="116" y="145" width="88.5" height="29"/>
+                                <rect key="frame" x="115.5" y="145" width="89" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -88,7 +88,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="VCc-cL-yQ3">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="yuG-YL-6aW">
+                        <barButtonItem key="leftBarButtonItem" title="设置" id="yuG-YL-6aW">
                             <connections>
                                 <segue destination="FYb-He-rQh" kind="show" id="XUd-13-dRh"/>
                             </connections>
@@ -143,6 +143,7 @@
                                 <constraint firstAttribute="trailing" secondItem="0H2-mH-q6h" secondAttribute="trailing" constant="113" id="ifB-5f-vn1"/>
                                 <constraint firstItem="bs9-w2-k1o" firstAttribute="top" secondItem="VzE-Bo-ZPR" secondAttribute="top" id="kH2-0x-JlZ"/>
                                 <constraint firstItem="0H2-mH-q6h" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ma4-GC-ucm" secondAttribute="leading" id="kzS-ik-CBR"/>
+                                <constraint firstItem="bs9-w2-k1o" firstAttribute="leading" secondItem="VzE-Bo-ZPR" secondAttribute="leading" constant="8" id="rRZ-om-dem"/>
                                 <constraint firstAttribute="bottom" secondItem="bs9-w2-k1o" secondAttribute="bottom" constant="5" id="wG4-sO-O5U"/>
                             </constraints>
                         </view>
@@ -352,7 +353,7 @@
                             <outlet property="delegate" destination="Zs9-cq-tdf" id="CEK-OB-VJ0"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" image="moon" id="F4u-if-SMQ"/>
+                    <tabBarItem key="tabBarItem" title="本月" image="moon" id="F4u-if-SMQ"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eCc-Zr-CMn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -390,7 +391,7 @@
                             <outlet property="delegate" destination="cMA-0x-iwi" id="b6g-VD-Tu5"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" image="sun" id="5TZ-0D-5tH"/>
+                    <tabBarItem key="tabBarItem" title="今日" image="sun" id="5TZ-0D-5tH"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oyt-xP-IGN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
