@@ -7,10 +7,12 @@
 		<string>是否使用一次性物品？</string>
 		<string>是否洗餐具前先用废纸擦拭油渍？</string>
 		<string>是否循环利用洗衣水？</string>
-		<string>是否使用步行/自行车/公共交通来代替私家车？</string>
+		<string>使用步行/自行车来代替私家车？</string>
+		<string>使用公共交通来代替私家车？</string>
 	</array>
 	<key>answers</key>
 	<array>
+		<string>Y</string>
 		<string>N</string>
 		<string>N</string>
 		<string>N</string>

@@ -45,7 +45,9 @@ class ViewController: UIViewController {
         
         dailyData = NSMutableDictionary(contentsOfFile: dailyPlistPath!)
         
+        countDown.text = String(Int((1.5/(0.65-(0.35-dT(2018.0)))*10)*365))+"天"
         
+        self.view.reloadInputViews()
     }
     
     
@@ -66,13 +68,16 @@ class ViewController: UIViewController {
         
         currentT.text = "+0.35摄氏度"
         
-        print (dT(2018.0))
+        let currentCountDown = Int((1.5/(0.65-(-0.35-dT(2018.0))))*3650)
         
-        countDown.text = String(Int((1.5/(0.65-(0.35-dT(2018.0)))*10)*365))+"天"
+        countDown.text = String(currentCountDown)+"天"
         
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    
+    
     func P(Q _Q:Double,n _n:Double,t12 _t12:Double,tou _tou:Double,t _t:Double) -> Double {
         let up = _Q*(pow(2.0, _n)-1) * pow(M_e, (_t-_t12)/_tou)
         let down = _n*_tou*pow(1+(pow(2.0, _n)-1)*pow(M_e, (_t-_t12)/_tou), (_n+1)/_n)
@@ -110,19 +115,24 @@ class ViewController: UIViewController {
     
     func reduceCarbon() -> Double {
         
-        let carBeforeString = initialData.object(forKey: "Data") as! [String]
-        let carBefore = (carBeforeString[7] as NSString).floatValue
-        let carAfterString = monthlyData.object(forKey: "Amount") as! [Float]
-        let carAfter = carAfterString[2]
-        let oilPerMile = (carBeforeString[4] as NSString).floatValue
+        let initialString = initialData.object(forKey: "Data") as! [String]
+        let monthlyString = monthlyData.object(forKey: "Amount") as! [Float]
         
-        let carReduce = (carBefore-carAfter)*oilPerMile*0.785 * 0.7
+        let carBefore = (initialString[7] as NSString).floatValue
+        let carAfter = monthlyString[2]
+        let oilPerMile = (initialString[4] as NSString).floatValue
+        let carReduce = (carBefore-carAfter)*oilPerMile*(2.7-0.036) * 0.7
         
+        let elecBefore = (initialString[6] as NSString).floatValue
+        let elecAfter = monthlyString[1]
+        let elecReduce = (elecBefore-elecAfter)*0.785*0.7
         
+        let waterBefore = (initialString[5] as NSString).floatValue
+        let waterAfter = monthlyString[0]
+        let waterReduce = (waterBefore-waterAfter)*0.91*0.7
         
-        return Double(carReduce)
+        return Double(carReduce+elecReduce+waterReduce)
        
-        
     }
     
     func dT(_ tn:Double) -> Double{
@@ -132,7 +142,9 @@ class ViewController: UIViewController {
         return k*(log(Cnow/280))
     }
     
-    
+    func updateHistory(){
+        
+    }
     
 }
 

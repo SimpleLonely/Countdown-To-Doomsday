@@ -12,14 +12,20 @@ import Charts
 
 class HistoryTableViewController: UITableViewController {
 
-    var date:[String]
+    var dict:NSMutableDictionary!
+    
+    var plistPath:String = String()
     
     var data:[Int]
     
+    var date:[String]
+    
     required init?(coder aDecoder: NSCoder) {
-        let path = Bundle.main.path(forResource:"HistoryPropertyList",ofType:"plist")
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
-        let dict = NSDictionary(contentsOfFile: path!)
+        plistPath = appDelegate.historyDocPath
+        
+        dict = NSMutableDictionary(contentsOfFile: plistPath)
         
         date = dict!.object(forKey: "Date") as! [String]
         
@@ -74,7 +80,9 @@ class HistoryTableViewController: UITableViewController {
         barChartView.data=datas
         
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
     override func viewDidLoad() {
         
         let path = Bundle.main.path(forResource:"HistoryPropertyList",ofType:"plist")

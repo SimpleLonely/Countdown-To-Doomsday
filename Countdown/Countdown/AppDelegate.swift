@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var initialDocPath:String = String()
     
+    var historyDocPath:String = String()
+    
     func prepareMonthlyThingsPlistForUse(){
         // 1
         let rootPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, .userDomainMask, true)[0]
@@ -66,8 +68,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    func prepareHistoryPlistForUse(){
+        // 1
+        let rootPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, .userDomainMask, true)[0]
+        // 2
+        historyDocPath = rootPath.appendingFormat("/HistoryPropertyList.plist")
+        if !FileManager.default.fileExists(atPath: historyDocPath){
+            let plistPathInBundle = Bundle.main.path(forResource: "HistoryPropertyList", ofType: "plist")
+            // 3
+            do {
+                try FileManager.default.copyItem(atPath: plistPathInBundle!, toPath: historyDocPath)
+            }catch{
+                print("Error occurred while copying file to document \(error)")
+            }
+        }
+    }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        self.prepareHistoryPlistForUse()
         self.prepareInitialDocForUse()
         self.prepareMonthlyThingsPlistForUse()
         self.prepareDailyThingsPlistForUse()
@@ -92,11 +111,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         self.prepareInitialDocForUse()
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-        self.prepareInitialDocForUse()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        self.prepareHistoryPlistForUse()
         self.prepareMonthlyThingsPlistForUse()
         self.prepareDailyThingsPlistForUse()
         self.prepareInitialDocForUse()
