@@ -20,24 +20,34 @@ class ViewController: UIViewController {
     
     var dailyPlistPath:String!
     
+    var historyPlistPath:String!
+    
     var initialData:NSMutableDictionary!
     
     var monthlyData:NSMutableDictionary!
     
     var dailyData:NSMutableDictionary!
     
+    var historyData:NSMutableDictionary!
+    
+    var currentCountDown = 0
+    
+    var lastCountDown = 0
+    
     let M_e = 2.71828182845904523536028747135266250
 
+    
     
     override func viewWillAppear(_ animated: Bool) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         initialDataPlistPath = appDelegate.initialDocPath
         
-        
         monthlyPlistPath = appDelegate.monthlyThingsPlistPathInDocument
         
         dailyPlistPath = appDelegate.dailyThingsPlistPathInDocument
+        
+        historyPlistPath = appDelegate.historyDocPath
         
         initialData = NSMutableDictionary(contentsOfFile: initialDataPlistPath!)
         
@@ -45,7 +55,23 @@ class ViewController: UIViewController {
         
         dailyData = NSMutableDictionary(contentsOfFile: dailyPlistPath!)
         
-        countDown.text = String(Int((1.5/(0.65-(0.35-dT(2018.0)))*10)*365))+"天"
+        historyData = NSMutableDictionary(contentsOfFile: historyPlistPath!)
+        
+        let f = (1.5/(0.65-(-0.35-dT(2018.0))))*36500
+        
+        currentCountDown = 1
+        do{
+            currentCountDown = Int(f)
+        };
+        let history = Int(currentCountDown) - lastCountDown
+        
+        print ("history1:"+String(history))
+        if history < 5000{
+            self.updateHistory(days:history)
+        }
+        lastCountDown = currentCountDown
+        
+        countDown.text = String(currentCountDown)+"天"
         
         self.view.reloadInputViews()
     }
@@ -54,11 +80,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
+        historyPlistPath = appDelegate.historyDocPath
+        
         initialDataPlistPath = appDelegate.initialDocPath
         
         monthlyPlistPath = appDelegate.monthlyThingsPlistPathInDocument
         
         dailyPlistPath = appDelegate.dailyThingsPlistPathInDocument
+        
+        historyData = NSMutableDictionary(contentsOfFile: historyPlistPath!)
         
         initialData = NSMutableDictionary(contentsOfFile: initialDataPlistPath!)
         
@@ -68,7 +98,13 @@ class ViewController: UIViewController {
         
         currentT.text = "+0.35摄氏度"
         
-        let currentCountDown = Int((1.5/(0.65-(-0.35-dT(2018.0))))*3650)
+        let history = currentCountDown - lastCountDown
+        
+        print ("history2:"+String(history))
+        
+        currentCountDown = Int((1.5/(0.65-(-0.35-dT(2018.0))))*3650)
+        
+        lastCountDown = currentCountDown
         
         countDown.text = String(currentCountDown)+"天"
         
@@ -120,16 +156,16 @@ class ViewController: UIViewController {
         
         let carBefore = (initialString[7] as NSString).floatValue
         let carAfter = monthlyString[2]
-        let oilPerMile = (initialString[4] as NSString).floatValue
-        let carReduce = (carBefore-carAfter)*oilPerMile*(2.7-0.036) * 0.7
+        let oilPerHundMile = (initialString[4] as NSString).floatValue
+        let carReduce = (carBefore-carAfter)*oilPerHundMile/100*(2.7-0.036) * 0.07
         
         let elecBefore = (initialString[6] as NSString).floatValue
         let elecAfter = monthlyString[1]
-        let elecReduce = (elecBefore-elecAfter)*0.785*0.7
+        let elecReduce = (elecBefore-elecAfter)*0.785*0.07
         
         let waterBefore = (initialString[5] as NSString).floatValue
         let waterAfter = monthlyString[0]
-        let waterReduce = (waterBefore-waterAfter)*0.91*0.7
+        let waterReduce = (waterBefore-waterAfter)*0.91*0.07
         
         return Double(carReduce+elecReduce+waterReduce)
        
@@ -137,12 +173,24 @@ class ViewController: UIViewController {
     
     func dT(_ tn:Double) -> Double{
         let k = 3.0/log(2)
-        let Cnow = C(tn, reduceCarbon())*0.278
+        var Cnow = C(tn, reduceCarbon())*0.278
         print("Cnow:"+String(Cnow))
+        if Cnow<=0 {
+            Cnow = 360
+        }
         return k*(log(Cnow/280))
     }
     
-    func updateHistory(){
+    func updateHistory(days day:Int){
+        var data:[Int]!
+        data = historyData.object(forKey: "Data") as? [Int]
+        
+        data[data.count-1] += day
+        
+        historyData.setValue(data, forKey: "Data")
+        
+        historyData.write(toFile: historyPlistPath, atomically: true)
+        
         
     }
     

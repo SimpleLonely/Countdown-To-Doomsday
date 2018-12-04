@@ -19,14 +19,14 @@
 	</array>
 	<key>Data</key>
 	<array>
-		<string>0</string>
-		<string>0</string>
-		<string>0</string>
-		<string>0</string>
-		<string>0</string>
-		<string>0</string>
-		<string>0</string>
-		<string>0</string>
+		<string>3</string>
+		<string>5</string>
+		<string>LED</string>
+		<string>5</string>
+		<string>12</string>
+		<string>150</string>
+		<string>220</string>
+		<string>500</string>
 		<string>0</string>
 		<string>0</string>
 		<string>0</string>

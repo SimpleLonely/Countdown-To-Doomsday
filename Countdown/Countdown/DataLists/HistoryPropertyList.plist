@@ -4,15 +4,21 @@
 <dict>
 	<key>Date</key>
 	<array>
-		<string>11月3日</string>
-		<string>11月4日</string>
-		<string>11月5日</string>
+		<string>7月</string>
+		<string>8月</string>
+		<string>9月</string>
+		<string>10月</string>
+		<string>11月</string>
+		<string>12月</string>
 	</array>
 	<key>Data</key>
 	<array>
-		<integer>12</integer>
-		<integer>5</integer>
-		<integer>3</integer>
+		<integer>120</integer>
+		<integer>520</integer>
+		<integer>310</integer>
+		<integer>580</integer>
+		<integer>280</integer>
+		<integer>300</integer>
 	</array>
 </dict>
 </plist>

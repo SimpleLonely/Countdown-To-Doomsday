@@ -25,7 +25,48 @@ class TodayTableViewController: UITableViewController {
     
     var plistPath:String!
     
+    var initialPath:String!
+    
+    var initialDict:NSMutableDictionary!
+    
+    required init?(coder aDecoder: NSCoder) {
+        
+        super.init(coder:aDecoder)
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        plistPath = appDelegate.monthlyThingsPlistPathInDocument
+        
+        dict = NSMutableDictionary(contentsOfFile: plistPath!)
+        
+        thingData = dict!.object(forKey: "Thing") as! [String]
+        
+        amountData = dict!.object(forKey: "Amount") as! [Float32]
+        
+        tipData = dict!.object(forKey: "Tip") as! [String]
+        
+        initialPath = appDelegate.initialDocPath
+        
+        initialDict = NSMutableDictionary(contentsOfFile: initialPath!)
+        
+        var initialString = initialDict.object(forKey: "Data") as! [String]
+        
+        
+        //将本月的数据默认设为历史数据
+        
+        /*amountData[0] = (initialString[5] as NSString).floatValue
+        
+        amountData[1] = (initialString[6] as NSString).floatValue
+        
+        amountData[3] = (initialString[7] as NSString).floatValue
+        
+        dict?.setValue(amountData, forKey: "Amount")
+        
+        dict?.write(toFile: plistPath!, atomically: true)*/
+    }
+    
     override func viewDidLoad() {
+        
         
         super.viewDidLoad()
 
@@ -43,6 +84,7 @@ class TodayTableViewController: UITableViewController {
         
         plistPath = appDelegate.monthlyThingsPlistPathInDocument
         
+        
         dict = NSMutableDictionary(contentsOfFile: plistPath!)
         
         thingData = dict!.object(forKey: "Thing") as! [String]
@@ -50,6 +92,7 @@ class TodayTableViewController: UITableViewController {
         amountData = dict!.object(forKey: "Amount") as! [Float32]
         
         tipData = dict!.object(forKey: "Tip") as! [String]
+        
         
         self.tableView.reloadData()
     }

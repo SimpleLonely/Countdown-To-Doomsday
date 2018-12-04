@@ -16,23 +16,10 @@ class HistoryTableViewController: UITableViewController {
     
     var plistPath:String = String()
     
-    var data:[Int]
+    var data:[Int] = []
     
-    var date:[String]
+    var date:[String] = []
     
-    required init?(coder aDecoder: NSCoder) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        plistPath = appDelegate.historyDocPath
-        
-        dict = NSMutableDictionary(contentsOfFile: plistPath)
-        
-        date = dict!.object(forKey: "Date") as! [String]
-        
-        data = dict!.object(forKey: "Data") as! [Int]
-        
-        super.init(coder: aDecoder)
-    }
     @IBOutlet weak var barChartView: BarChartView!
     
     //设置表格的相关属性
@@ -81,17 +68,22 @@ class HistoryTableViewController: UITableViewController {
         
     }
     override func viewWillAppear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
-    }
-    override func viewDidLoad() {
+        plistPath = appDelegate.historyDocPath
         
-        let path = Bundle.main.path(forResource:"HistoryPropertyList",ofType:"plist")
-        
-        let dict = NSDictionary(contentsOfFile: path!)
+        dict = NSMutableDictionary(contentsOfFile: plistPath)
         
         date = dict!.object(forKey: "Date") as! [String]
         
         data = dict!.object(forKey: "Data") as! [Int]
+        
+        setChart(withCount: data.count)
+        
+        self.tableView.reloadData()
+    }
+    override func viewDidLoad() {
+        
         
         setChart(withCount: data.count)
         
