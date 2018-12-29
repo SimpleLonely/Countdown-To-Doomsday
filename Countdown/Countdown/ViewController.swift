@@ -35,10 +35,20 @@ class ViewController: UIViewController {
     var lastCountDown = 0
     
     let M_e = 2.71828182845904523536028747135266250
-
+    
+   
+    
+   
     
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        UserDefaults.standard.set(true, forKey: "loginStatus")
+        
+        UserDefaults.standard.set("MyName", forKey: "Name")
+        
+        UserDefaults.standard.set("My Introduction", forKey: "Introduction")
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         initialDataPlistPath = appDelegate.initialDocPath

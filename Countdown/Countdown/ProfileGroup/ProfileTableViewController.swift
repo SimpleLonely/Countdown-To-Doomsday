@@ -12,15 +12,14 @@ class ProfileTableViewController: UITableViewController {
 
     @IBOutlet weak var myHeadhot: UIImageView!
     
-    let name:[String] = ["历史贡献","初始档案"]
+    let name:[String] = ["我的账户","历史贡献","初始档案"]
     
-    @IBOutlet weak var nickName: UILabel!
+    let defaults = UserDefaults.standard
     
-    @IBOutlet weak var sign: UILabel!
-    
+    @IBAction func tapMine(_ sender: Any) {
+        
+    }
     override func viewDidLoad() {
-        nickName.text = "CAQ"
-        sign.text = "stszz"
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
@@ -39,7 +38,7 @@ class ProfileTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 2
+        return name.count
     }
 
     
@@ -66,15 +65,36 @@ class ProfileTableViewController: UITableViewController {
         //self.navigationController?.pushViewController(nextPage, animated: true)
         let historyPage = storyBoard.instantiateViewController(withIdentifier:"History") as! HistoryTableViewController
         
-        if indexPath.row == 0{
-            self.navigationController?.pushViewController(historyPage, animated: true)
+        let myProfilePage = storyBoard.instantiateViewController(withIdentifier: "MyProfilePage") as! MyProfileSettingViewController
+        
+        if indexPath.row == 1{
+            
         }
         else{
+            
+        }
+        switch indexPath.row {
+        case 0:
+            if defaults.bool(forKey: "loginStatus"){
+            self.navigationController?.pushViewController(myProfilePage, animated: true)
+            }
+            else{
+                showLoginPage()
+            }
+            break
+        case 1:
+            self.navigationController?.pushViewController(historyPage, animated: true)
+            break
+        case 2:
             self.navigationController?.pushViewController(equipmentsPage, animated: true)
+        default:
+            print ("outOfIndex")
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
+    func showLoginPage(){
+        
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

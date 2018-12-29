@@ -18,6 +18,7 @@
 		04E1BB9B21B17C3A00000E3B /* DailyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1BB9A21B17C3A00000E3B /* DailyTableViewController.swift */; };
 		04E1BB9D21B17C6200000E3B /* DailyThingsDataList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04E1BB9C21B17C6200000E3B /* DailyThingsDataList.plist */; };
 		04E1BBA021B44A8F00000E3B /* Equipment2TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1BB9F21B44A8F00000E3B /* Equipment2TableViewController.swift */; };
+		04FE9BED21D7AA46004D2D4A /* MyProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FE9BEC21D7AA46004D2D4A /* MyProfileSettingViewController.swift */; };
 		183A1D9921AC212E000ECFE3 /* InputAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183A1D9821AC212E000ECFE3 /* InputAlertController.swift */; };
 		183B06D421AABA3000200825 /* MonthlyThingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183B06D321AABA3000200825 /* MonthlyThingsTableViewController.swift */; };
 		183B06D821AAD84800200825 /* MonthlyThingsDataList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 183B06D721AAD84800200825 /* MonthlyThingsDataList.plist */; };
@@ -77,6 +78,7 @@
 		04E1BB9A21B17C3A00000E3B /* DailyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableViewController.swift; sourceTree = "<group>"; };
 		04E1BB9C21B17C6200000E3B /* DailyThingsDataList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DailyThingsDataList.plist; sourceTree = "<group>"; };
 		04E1BB9F21B44A8F00000E3B /* Equipment2TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equipment2TableViewController.swift; sourceTree = "<group>"; };
+		04FE9BEC21D7AA46004D2D4A /* MyProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileSettingViewController.swift; sourceTree = "<group>"; };
 		183A1D9821AC212E000ECFE3 /* InputAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAlertController.swift; sourceTree = "<group>"; };
 		183B06D321AABA3000200825 /* MonthlyThingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyThingsTableViewController.swift; sourceTree = "<group>"; };
 		183B06D721AAD84800200825 /* MonthlyThingsDataList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MonthlyThingsDataList.plist; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				04349FF421B0D30F0045C6AF /* HistoryTableViewController.swift */,
 				04E1BB9521B1649900000E3B /* Equipment1TableViewController.swift */,
 				04E1BB9F21B44A8F00000E3B /* Equipment2TableViewController.swift */,
+				04FE9BEC21D7AA46004D2D4A /* MyProfileSettingViewController.swift */,
 			);
 			path = ProfileGroup;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				04349FF521B0D30F0045C6AF /* HistoryTableViewController.swift in Sources */,
 				04428E4121AEB86600494868 /* ProfileTableViewController.swift in Sources */,
 				04E1BB9B21B17C3A00000E3B /* DailyTableViewController.swift in Sources */,
+				04FE9BED21D7AA46004D2D4A /* MyProfileSettingViewController.swift in Sources */,
 				04428E4321B019BA00494868 /* InitialDocTableViewController.swift in Sources */,
 				183A1D9921AC212E000ECFE3 /* InputAlertController.swift in Sources */,
 				04E1BBA021B44A8F00000E3B /* Equipment2TableViewController.swift in Sources */,
