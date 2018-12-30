@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Auth0
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var initialDocPath:String = String()
     
     var historyDocPath:String = String()
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
+        return Auth0.resumeAuth(url, options: options)
+    }
     
     func prepareMonthlyThingsPlistForUse(){
         // 1

@@ -11,6 +11,7 @@
 		04428E4121AEB86600494868 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04428E4021AEB86600494868 /* ProfileTableViewController.swift */; };
 		04428E4321B019BA00494868 /* InitialDocTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04428E4221B019BA00494868 /* InitialDocTableViewController.swift */; };
 		04428E4521B01A8200494868 /* InitialDataList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04428E4421B01A8200494868 /* InitialDataList.plist */; };
+		04541EDD21D89CC800E6D482 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04541EDB21D89CC700E6D482 /* Auth0.plist */; };
 		0484645B21B0FC5000A04B03 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0484645821B0FBE600A04B03 /* Charts.framework */; };
 		0484645C21B0FC5000A04B03 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0484645821B0FBE600A04B03 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		04E1BB9621B1649900000E3B /* Equipment1TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1BB9521B1649900000E3B /* Equipment1TableViewController.swift */; };
@@ -27,6 +28,7 @@
 		18431C8E21A5905E00D00AC7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18431C8C21A5905E00D00AC7 /* Main.storyboard */; };
 		18431C9021A5906500D00AC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18431C8F21A5906500D00AC7 /* Assets.xcassets */; };
 		18431C9321A5906500D00AC7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18431C9121A5906500D00AC7 /* LaunchScreen.storyboard */; };
+		44B896139B14DDA6E25396DF /* Pods_Countdown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95ADD0C543A7C04885DFCDFD /* Pods_Countdown.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,7 @@
 		04428E4021AEB86600494868 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		04428E4221B019BA00494868 /* InitialDocTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialDocTableViewController.swift; sourceTree = "<group>"; };
 		04428E4421B01A8200494868 /* InitialDataList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InitialDataList.plist; sourceTree = "<group>"; };
+		04541EDB21D89CC700E6D482 /* Auth0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Auth0.plist; path = Countdown/Auth0.plist; sourceTree = SOURCE_ROOT; };
 		0484645221B0FBE600A04B03 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../../Downloads/Charts-master/Charts.xcodeproj"; sourceTree = "<group>"; };
 		04E1BB9521B1649900000E3B /* Equipment1TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equipment1TableViewController.swift; sourceTree = "<group>"; };
 		04E1BB9721B16E0000000E3B /* HistoryPropertyList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = HistoryPropertyList.plist; sourceTree = "<group>"; };
@@ -89,6 +92,9 @@
 		18431C8F21A5906500D00AC7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18431C9221A5906500D00AC7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18431C9421A5906500D00AC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		95ADD0C543A7C04885DFCDFD /* Pods_Countdown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Countdown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A254758A7662331136951058 /* Pods-Countdown.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Countdown.release.xcconfig"; path = "Pods/Target Support Files/Pods-Countdown/Pods-Countdown.release.xcconfig"; sourceTree = "<group>"; };
+		FFEA5A06DE3EB0A2770D1128 /* Pods-Countdown.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Countdown.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Countdown/Pods-Countdown.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +103,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0484645B21B0FC5000A04B03 /* Charts.framework in Frameworks */,
+				44B896139B14DDA6E25396DF /* Pods_Countdown.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +113,7 @@
 		0484643121B0E03C00A04B03 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				95ADD0C543A7C04885DFCDFD /* Pods_Countdown.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -159,6 +167,7 @@
 				18431C8721A5905D00D00AC7 /* Countdown */,
 				18431C8621A5905D00D00AC7 /* Products */,
 				0484643121B0E03C00A04B03 /* Frameworks */,
+				818595540897CEA469EC97AF /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -173,6 +182,7 @@
 		18431C8721A5905D00D00AC7 /* Countdown */ = {
 			isa = PBXGroup;
 			children = (
+				04541EDB21D89CC700E6D482 /* Auth0.plist */,
 				04E1BB9E21B42F9F00000E3B /* DataLists */,
 				04E1BB9921B1786800000E3B /* ThingsList */,
 				04E1BB9321B1624800000E3B /* ProfileGroup */,
@@ -187,6 +197,15 @@
 			path = Countdown;
 			sourceTree = "<group>";
 		};
+		818595540897CEA469EC97AF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FFEA5A06DE3EB0A2770D1128 /* Pods-Countdown.debug.xcconfig */,
+				A254758A7662331136951058 /* Pods-Countdown.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -194,10 +213,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 18431C9721A5906500D00AC7 /* Build configuration list for PBXNativeTarget "Countdown" */;
 			buildPhases = (
+				4813D83012FA3229C646248B /* [CP] Check Pods Manifest.lock */,
 				18431C8121A5905D00D00AC7 /* Sources */,
 				18431C8221A5905D00D00AC7 /* Frameworks */,
 				18431C8321A5905D00D00AC7 /* Resources */,
 				0484645F21B0FC5000A04B03 /* Embed Frameworks */,
+				5ADFE005858B7DC3D52E8B62 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -277,10 +298,60 @@
 				04428E4521B01A8200494868 /* InitialDataList.plist in Resources */,
 				04E1BB9821B16E0000000E3B /* HistoryPropertyList.plist in Resources */,
 				183B06D821AAD84800200825 /* MonthlyThingsDataList.plist in Resources */,
+				04541EDD21D89CC800E6D482 /* Auth0.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4813D83012FA3229C646248B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Countdown-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5ADFE005858B7DC3D52E8B62 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Countdown/Pods-Countdown-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Auth0/Auth0.framework",
+				"${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Auth0.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleKeychain.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Countdown/Pods-Countdown-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		18431C8121A5905D00D00AC7 /* Sources */ = {
@@ -449,8 +520,9 @@
 		};
 		18431C9821A5906500D00AC7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FFEA5A06DE3EB0A2770D1128 /* Pods-Countdown.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4XUF6M7R98;
@@ -468,8 +540,9 @@
 		};
 		18431C9921A5906500D00AC7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A254758A7662331136951058 /* Pods-Countdown.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4XUF6M7R98;

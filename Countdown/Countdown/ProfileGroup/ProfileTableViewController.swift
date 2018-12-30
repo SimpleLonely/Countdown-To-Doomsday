@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Auth0
+
 @IBDesignable
 class ProfileTableViewController: UITableViewController {
 
@@ -67,12 +69,6 @@ class ProfileTableViewController: UITableViewController {
         
         let myProfilePage = storyBoard.instantiateViewController(withIdentifier: "MyProfilePage") as! MyProfileSettingViewController
         
-        if indexPath.row == 1{
-            
-        }
-        else{
-            
-        }
         switch indexPath.row {
         case 0:
             if defaults.bool(forKey: "loginStatus"){
@@ -93,7 +89,22 @@ class ProfileTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     func showLoginPage(){
-        
+        Auth0
+            .webAuth()
+            .scope("openid profile")
+            .audience("https://simple-lin.au.auth0.com/userinfo")
+            .start {
+                switch $0 {
+                case .failure(let error):
+                    // Handle the error
+                    print("Error: \(error)")
+                case .success(let credentials):
+                    // Do something with credentials e.g.: save them.
+                    // Auth0 will automatically dismiss the login page
+                    self.defaults.set(true,forKey: "loginStatus")
+                    print("Credentials: \(credentials)")
+                }
+        }
     }
     /*
     // Override to support conditional editing of the table view.
