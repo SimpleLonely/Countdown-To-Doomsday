@@ -65,7 +65,7 @@ class ViewController: UIViewController {
         
         dailyData = NSMutableDictionary(contentsOfFile: dailyPlistPath!)
         
-        historyData = NSMutableDictionary(contentsOfFile: historyPlistPath!)
+        
         
         let f = (1.5/(0.65-(-0.35-dT(2018.0))))*36500
         
@@ -192,14 +192,15 @@ class ViewController: UIViewController {
     }
     
     func updateHistory(days day:Int){
-        var data:[Int]!
-        data = historyData.object(forKey: "Data") as? [Int]
+        var data:[HistoryData]!
+        let historyDict = HistoryData.ArchiveURL.path
+        let dataManager = DataManager(filePath: historyDict)
+        let historyData = dataManager.loadData(pathToFile:historyDict)
+        data = (historyData as! [HistoryData])
         
-        data[data.count-1] += day
+        data[data.count-1].amount += day
         
-        historyData.setValue(data, forKey: "Data")
-        
-        historyData.write(toFile: historyPlistPath, atomically: true)
+        dataManager.saveData(dataList: data, pathToFile: historyDict)
         
         
     }

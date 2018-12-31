@@ -11,6 +11,9 @@ import Auth0
 
 @IBDesignable
 class ProfileTableViewController: UITableViewController {
+    
+    // Create an instance of the credentials manager for storing credentials
+    let credentialsManager = CredentialsManager(authentication: Auth0.authentication())
 
     @IBOutlet weak var myHeadhot: UIImageView!
     
@@ -102,7 +105,9 @@ class ProfileTableViewController: UITableViewController {
                     // Do something with credentials e.g.: save them.
                     // Auth0 will automatically dismiss the login page
                     self.defaults.set(true,forKey: "loginStatus")
+                    self.credentialsManager.store(credentials: credentials)
                     print("Credentials: \(credentials)")
+                
                 }
         }
     }

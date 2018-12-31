@@ -8,7 +8,7 @@
 
 import UIKit
 import Charts
-
+import os.log
 
 class HistoryTableViewController: UITableViewController {
 
@@ -19,6 +19,8 @@ class HistoryTableViewController: UITableViewController {
     var data:[Int] = []
     
     var date:[String] = []
+    
+    var historyData = [HistoryData]()
     
     @IBOutlet weak var barChartView: BarChartView!
     
@@ -54,8 +56,8 @@ class HistoryTableViewController: UITableViewController {
         var values = [BarChartDataEntry]()
         for i in 0..<count{
             //设置数据
-            let value = data[i]
-            let entry = BarChartDataEntry(x:Double(i),y:Double(value))
+            let value = historyData[i].amount
+            let entry = BarChartDataEntry(x:Double(i),y:Double(value) ?? 0.0)
             values.append(entry)
         }
         
@@ -78,14 +80,21 @@ class HistoryTableViewController: UITableViewController {
         
         data = dict!.object(forKey: "Data") as! [Int]
         
-        setChart(withCount: data.count)
+        for i in 0...date.count{
+            historyData.append(HistoryData(date: date[i], amount: data[i]))
+        }
+        
+        setChart(withCount: historyData.count)
         
         self.tableView.reloadData()
     }
+    
+    
+    
     override func viewDidLoad() {
         
         
-        setChart(withCount: data.count)
+        setChart(withCount: historyData.count)
         
         super.viewDidLoad()
 
@@ -105,7 +114,7 @@ class HistoryTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return data.count
+        return historyData.count
     }
 
     
@@ -113,14 +122,27 @@ class HistoryTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath)
 
         let label = cell.textLabel
-        label?.text = date[indexPath.row]
+        label?.text = historyData[indexPath.row].date
         
         let detail = cell.detailTextLabel
-        detail?.text = String(data[indexPath.row])
+        detail?.text = String(historyData[indexPath.row].amount)
         
         
         return cell
     }
+    public func saveData() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(historyData, toFile: HistoryData.ArchiveURL.path)
+        if isSuccessfulSave {
+            os_log("Data successfully saved.", log: OSLog.default, type: .debug)
+        } else {
+            os_log("Failed to save datas...", log: OSLog.default, type: .error)
+        }
+    }
+    
+    public func loadData() -> [HistoryData]?  {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: HistoryData.ArchiveURL.path) as? [HistoryData]
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)

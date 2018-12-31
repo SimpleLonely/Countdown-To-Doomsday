@@ -20,7 +20,8 @@ class MyProfileSettingViewController: UIViewController {
     
     @IBAction func LogOut(_ sender: Any) {
         userDefault.set(false, forKey: "loginStatus")
-        
+        _ = SessionManager.shared.logout()
+        self.navigationController?.popViewController(animated: true)
     }
     @IBOutlet weak var introduction: UILabel!
     

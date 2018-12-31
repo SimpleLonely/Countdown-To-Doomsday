@@ -12,6 +12,9 @@
 		04428E4321B019BA00494868 /* InitialDocTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04428E4221B019BA00494868 /* InitialDocTableViewController.swift */; };
 		04428E4521B01A8200494868 /* InitialDataList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04428E4421B01A8200494868 /* InitialDataList.plist */; };
 		04541EDD21D89CC800E6D482 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04541EDB21D89CC700E6D482 /* Auth0.plist */; };
+		04541EDF21DA40B800E6D482 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04541EDE21DA40B800E6D482 /* SessionManager.swift */; };
+		04541EE121DA558800E6D482 /* HistoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04541EE021DA558800E6D482 /* HistoryData.swift */; };
+		04541EE321DA645F00E6D482 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04541EE221DA645F00E6D482 /* DataManager.swift */; };
 		0484645B21B0FC5000A04B03 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0484645821B0FBE600A04B03 /* Charts.framework */; };
 		0484645C21B0FC5000A04B03 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0484645821B0FBE600A04B03 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		04E1BB9621B1649900000E3B /* Equipment1TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1BB9521B1649900000E3B /* Equipment1TableViewController.swift */; };
@@ -75,6 +78,9 @@
 		04428E4221B019BA00494868 /* InitialDocTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialDocTableViewController.swift; sourceTree = "<group>"; };
 		04428E4421B01A8200494868 /* InitialDataList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InitialDataList.plist; sourceTree = "<group>"; };
 		04541EDB21D89CC700E6D482 /* Auth0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Auth0.plist; path = Countdown/Auth0.plist; sourceTree = SOURCE_ROOT; };
+		04541EDE21DA40B800E6D482 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		04541EE021DA558800E6D482 /* HistoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryData.swift; sourceTree = "<group>"; };
+		04541EE221DA645F00E6D482 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		0484645221B0FBE600A04B03 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../../Downloads/Charts-master/Charts.xcodeproj"; sourceTree = "<group>"; };
 		04E1BB9521B1649900000E3B /* Equipment1TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equipment1TableViewController.swift; sourceTree = "<group>"; };
 		04E1BB9721B16E0000000E3B /* HistoryPropertyList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = HistoryPropertyList.plist; sourceTree = "<group>"; };
@@ -182,11 +188,14 @@
 		18431C8721A5905D00D00AC7 /* Countdown */ = {
 			isa = PBXGroup;
 			children = (
+				04541EE021DA558800E6D482 /* HistoryData.swift */,
 				04541EDB21D89CC700E6D482 /* Auth0.plist */,
 				04E1BB9E21B42F9F00000E3B /* DataLists */,
 				04E1BB9921B1786800000E3B /* ThingsList */,
 				04E1BB9321B1624800000E3B /* ProfileGroup */,
 				18431C8821A5905D00D00AC7 /* AppDelegate.swift */,
+				04541EDE21DA40B800E6D482 /* SessionManager.swift */,
+				04541EE221DA645F00E6D482 /* DataManager.swift */,
 				18431C8A21A5905D00D00AC7 /* ViewController.swift */,
 				18431C8C21A5905E00D00AC7 /* Main.storyboard */,
 				183A1D9821AC212E000ECFE3 /* InputAlertController.swift */,
@@ -360,6 +369,8 @@
 			files = (
 				04349FF521B0D30F0045C6AF /* HistoryTableViewController.swift in Sources */,
 				04428E4121AEB86600494868 /* ProfileTableViewController.swift in Sources */,
+				04541EDF21DA40B800E6D482 /* SessionManager.swift in Sources */,
+				04541EE321DA645F00E6D482 /* DataManager.swift in Sources */,
 				04E1BB9B21B17C3A00000E3B /* DailyTableViewController.swift in Sources */,
 				04FE9BED21D7AA46004D2D4A /* MyProfileSettingViewController.swift in Sources */,
 				04428E4321B019BA00494868 /* InitialDocTableViewController.swift in Sources */,
@@ -368,6 +379,7 @@
 				18431C8B21A5905D00D00AC7 /* ViewController.swift in Sources */,
 				18431C8921A5905D00D00AC7 /* AppDelegate.swift in Sources */,
 				04E1BB9621B1649900000E3B /* Equipment1TableViewController.swift in Sources */,
+				04541EE121DA558800E6D482 /* HistoryData.swift in Sources */,
 				183B06D421AABA3000200825 /* MonthlyThingsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
