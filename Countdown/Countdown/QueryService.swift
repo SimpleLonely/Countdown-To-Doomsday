@@ -24,5 +24,5 @@ class QueryService{
         }
         task.resume()
     }
-    
+    //TODO: add enough funcs to read apis
 }

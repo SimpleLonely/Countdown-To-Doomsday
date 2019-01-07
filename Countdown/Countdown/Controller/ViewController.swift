@@ -37,7 +37,7 @@ class ViewController: UIViewController {
     let M_e = 2.71828182845904523536028747135266250
     
    
-    
+    //TODO: extract these figures to a single file
    
     
     
@@ -202,7 +202,7 @@ class ViewController: UIViewController {
         //只会在最后一天进行修改
         data[data.count-1].amount = String(Int(data[data.count-1].amount) ?? 0 + day)
         
-        //TODO: async to sql
+        //TODO: async to sql and async to change UI
         
         let queryService = QueryService()
         var components = URLComponents(string: QueryService.baseURL+"get-history")!

@@ -20,6 +20,7 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
             }
         }
         
+        //TODO: change to Userdefaults
         dict?.setValue(tempDetail, forKey: "Data")
         
         tempDetail = []

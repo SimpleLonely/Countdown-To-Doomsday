@@ -1,76 +1,39 @@
 //
-//  TodayTableViewController.swift
+//  DailyTableViewController.swift
 //  Countdown
 //
-//  Created by apple on 2018/11/25.
-//  Copyright © 2018年 nju. All rights reserved.
+//  Created by mac on 11/30/18.
+//  Copyright © 2018 nju. All rights reserved.
 //
 
 import UIKit
 
-@IBDesignable
-class TodayTableViewController: UITableViewController {
+class DailyTableViewController: UITableViewController {
 
-    //Declare the monthly things
+    var questions:[String] = []
     
-    var thingData:[String] = []
-    
-    var amountData:[Float32] = []
-    
-    var tipData:[String] = []
+    var answers:[String] = []
     
     var dict:NSMutableDictionary!
     
-    var notesArray:NSMutableArray!
-    
     var plistPath:String!
     
-    var initialPath:String!
-    
-    var initialDict:NSMutableDictionary!
-    
-    required init?(coder aDecoder: NSCoder) {
-        
-        super.init(coder:aDecoder)
-        
+
+    override func viewWillAppear(_ animated: Bool) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
-        plistPath = appDelegate.monthlyThingsPlistPathInDocument
+        plistPath = appDelegate.dailyThingsPlistPathInDocument
         
         dict = NSMutableDictionary(contentsOfFile: plistPath!)
         
-        thingData = dict!.object(forKey: "Thing") as! [String]
+        questions = dict!.object(forKey: "questions") as! [String]
         
-        amountData = dict!.object(forKey: "Amount") as! [Float32]
-        
-        tipData = dict!.object(forKey: "Tip") as! [String]
-        
-        initialPath = appDelegate.initialDocPath
-        
-        initialDict = NSMutableDictionary(contentsOfFile: initialPath!)
-        
-        var initialString = initialDict.object(forKey: "Data") as! [String]
-        
-        
-        //将本月的数据默认设为历史数据
-        
-        /*amountData[0] = (initialString[5] as NSString).floatValue
-        
-        amountData[1] = (initialString[6] as NSString).floatValue
-        
-        amountData[3] = (initialString[7] as NSString).floatValue
-        
-        dict?.setValue(amountData, forKey: "Amount")
-        
-        dict?.write(toFile: plistPath!, atomically: true)*/
+        answers = dict!.object(forKey: "answers") as! [String]
     }
     
     override func viewDidLoad() {
-        
-        
         super.viewDidLoad()
 
-        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -78,24 +41,6 @@ class TodayTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        plistPath = appDelegate.monthlyThingsPlistPathInDocument
-        
-        
-        dict = NSMutableDictionary(contentsOfFile: plistPath!)
-        
-        thingData = dict!.object(forKey: "Thing") as! [String]
-        
-        amountData = dict!.object(forKey: "Amount") as! [Float32]
-        
-        tipData = dict!.object(forKey: "Tip") as! [String]
-        
-        
-        self.tableView.reloadData()
-    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -105,38 +50,57 @@ class TodayTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        //let firstArray = notesArray.object(at: 0) as! Array<String>
-        //return firstArray.count
-        return thingData.count
+        return questions.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DailyThings", for: indexPath)
 
-        //let item = items[indexPath.row]
+        cell.textLabel?.text = questions[indexPath.row]
         
-        //let label1 = cell.textLabel
-        //label1?.text = thingData[indexPath.row]
+        let switchView = UISwitch(frame: .zero)
         
-        //let label2 = cell.detailTextLabel
-        //label2?.text = String (amountData[indexPath.row])
-        //let firstArray = notesArray.object(at: 0) as! Array<String>
-        cell.textLabel!.text = thingData[indexPath.row]
-        cell.detailTextLabel!.text = String(amountData[indexPath.row])
+        let currentAnswer = answers[indexPath.row]
+        
+        if (currentAnswer == "Y"){
+            switchView.setOn(true,animated: true)
+        }
+        else{
+            switchView.setOn(false, animated: true)
+        }
+        
+        switchView.tag = indexPath.row // for detect which row switch Changed
+        switchView.addTarget(self, action: #selector(self.switchChanged(_:)), for: .valueChanged)
+        cell.accessoryView = switchView
         
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    @objc func switchChanged(_ sender : UISwitch!) -> Void {
+        //print("table row switch Changed \(sender.tag)")
+        //print("The switch is \(sender.isOn ? "ON" : "OFF")")
         
-        alert(currentRow: indexPath)
+        answers[sender.tag] = (sender.isOn ? "Y":"N")
+        
+        //print (answers[sender.tag])
+        
+        //TODO: async to sql
+        dict?.setValue(answers, forKey: "answers")
+        
+        dict?.write(toFile: plistPath!, atomically: true)
+        
+        //self.tableView.reloadData()
+        
+        //self.refreshControl?.endRefreshing()
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
+    
     //弹出框，来修改数据
-    func alert (currentRow cRow: IndexPath){
+    /*func alert (currentRow cRow: IndexPath){
         let currentTip = tipData[cRow.row]
         
         let alertController = UIAlertController(title: currentTip, message: " ", preferredStyle: .alert)
@@ -161,10 +125,10 @@ class TodayTableViewController: UITableViewController {
         self.present(alertController,animated: true,completion: nil)
         
     }
-    
+    */
     
     //更新所有数据
-    func refresh(currentRow cRow:IndexPath,amount toChange:Float)
+    /*func refresh(currentRow cRow:IndexPath,amount toChange:Float)
     {
         // let path = Bundle.main.path(forResource:"MonthlyThingsDataList",ofType:"plist")
         
@@ -181,8 +145,7 @@ class TodayTableViewController: UITableViewController {
         self.tableView.reloadData()
         
         self.refreshControl?.endRefreshing()
-    }
-    
+    }*/
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
