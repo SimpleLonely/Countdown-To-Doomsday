@@ -16,13 +16,27 @@ struct PropertyKey {
 
 class HistoryData: NSObject, NSCoding{
     var date:String
-    var amount:Int
+    var amount:String
+    
+    // 1
+    let defaultSession = URLSession(configuration: .default)
+    // 2
+    private var dataTask: URLSessionDataTask?
+    
+    private var errorMessage=""
+    let baseUrl = "http://47.106.153.201/"
+    
+    let defaultMail = "default@mail"
+    
+    let userDefaults = UserDefaults.standard
+    typealias JSONDictionary = [String: Any]
+    
     
     //MARK: Archiving Paths
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
     static let ArchiveURL = DocumentsDirectory.appendingPathComponent("historyData")
 
-    init(date:String,amount:Int) {
+    init(date:String,amount:String) {
         self.date = date
         self.amount = amount
     }
@@ -37,13 +51,12 @@ class HistoryData: NSObject, NSCoding{
         }
         
         // Because photo is an optional property of Meal, just use conditional cast.
-        let amount = aDecoder.decodeObject(forKey: PropertyKey.amount) as? Int
-        
+        guard let amount = aDecoder.decodeObject(forKey: PropertyKey.amount) as? String else {
+            os_log("Unable to decode the amount for a History object.", log: OSLog.default, type: .debug)
+            return nil
+        }
         
         // Must call designated initializer.
-        self.init(date:date,amount:amount!)
+        self.init(date:date,amount:amount)
     }
-    
-    
-    
 }

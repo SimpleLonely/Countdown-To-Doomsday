@@ -13,12 +13,12 @@
 	</array>
 	<key>Data</key>
 	<array>
-		<integer>120</integer>
-		<integer>520</integer>
-		<integer>310</integer>
-		<integer>580</integer>
-		<integer>280</integer>
-		<integer>300</integer>
+		<string>120</string>
+		<string>520</string>
+		<string>310</string>
+		<string>580</string>
+		<string>280</string>
+		<string>300</string>
 	</array>
 </dict>
 </plist>

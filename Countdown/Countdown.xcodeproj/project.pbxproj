@@ -15,6 +15,7 @@
 		04541EDF21DA40B800E6D482 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04541EDE21DA40B800E6D482 /* SessionManager.swift */; };
 		04541EE121DA558800E6D482 /* HistoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04541EE021DA558800E6D482 /* HistoryData.swift */; };
 		04541EE321DA645F00E6D482 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04541EE221DA645F00E6D482 /* DataManager.swift */; };
+		04541EE521E3595500E6D482 /* QueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04541EE421E3595500E6D482 /* QueryService.swift */; };
 		0484645B21B0FC5000A04B03 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0484645821B0FBE600A04B03 /* Charts.framework */; };
 		0484645C21B0FC5000A04B03 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0484645821B0FBE600A04B03 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		04E1BB9621B1649900000E3B /* Equipment1TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1BB9521B1649900000E3B /* Equipment1TableViewController.swift */; };
@@ -81,6 +82,7 @@
 		04541EDE21DA40B800E6D482 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		04541EE021DA558800E6D482 /* HistoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryData.swift; sourceTree = "<group>"; };
 		04541EE221DA645F00E6D482 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		04541EE421E3595500E6D482 /* QueryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryService.swift; sourceTree = "<group>"; };
 		0484645221B0FBE600A04B03 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../../Downloads/Charts-master/Charts.xcodeproj"; sourceTree = "<group>"; };
 		04E1BB9521B1649900000E3B /* Equipment1TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equipment1TableViewController.swift; sourceTree = "<group>"; };
 		04E1BB9721B16E0000000E3B /* HistoryPropertyList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = HistoryPropertyList.plist; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				18431C8F21A5906500D00AC7 /* Assets.xcassets */,
 				18431C9121A5906500D00AC7 /* LaunchScreen.storyboard */,
 				18431C9421A5906500D00AC7 /* Info.plist */,
+				04541EE421E3595500E6D482 /* QueryService.swift */,
 			);
 			path = Countdown;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				04E1BB9B21B17C3A00000E3B /* DailyTableViewController.swift in Sources */,
 				04FE9BED21D7AA46004D2D4A /* MyProfileSettingViewController.swift in Sources */,
 				04428E4321B019BA00494868 /* InitialDocTableViewController.swift in Sources */,
+				04541EE521E3595500E6D482 /* QueryService.swift in Sources */,
 				183A1D9921AC212E000ECFE3 /* InputAlertController.swift in Sources */,
 				04E1BBA021B44A8F00000E3B /* Equipment2TableViewController.swift in Sources */,
 				18431C8B21A5905D00D00AC7 /* ViewController.swift in Sources */,

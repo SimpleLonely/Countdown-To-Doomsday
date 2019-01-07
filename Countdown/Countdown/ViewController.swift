@@ -194,13 +194,32 @@ class ViewController: UIViewController {
     func updateHistory(days day:Int){
         var data:[HistoryData]!
         let historyDict = HistoryData.ArchiveURL.path
+        print("historyDict"+historyDict)
         let dataManager = DataManager(filePath: historyDict)
-        let historyData = dataManager.loadData(pathToFile:historyDict)
+        let historyData = dataManager.loadDataFromFile(pathToFile:historyDict)
         data = (historyData as! [HistoryData])
         
-        data[data.count-1].amount += day
+        //只会在最后一天进行修改
+        data[data.count-1].amount = String(Int(data[data.count-1].amount) ?? 0 + day)
         
-        dataManager.saveData(dataList: data, pathToFile: historyDict)
+        //TODO: async to sql
+        
+        let queryService = QueryService()
+        var components = URLComponents(string: QueryService.baseURL+"get-history")!
+        components.queryItems = [
+            URLQueryItem(name: "mail", value: "710282573@qq.com"),
+            URLQueryItem(name: "date", value: "7.10")
+        ]
+        queryService.getHistoryItem(request: URLRequest(url: components.url!)){
+            (data, error) -> Void in
+            if error != nil {
+                print(error!)
+            } else {
+                print(data)
+            }
+        }
+        
+        dataManager.saveDataToFile(dataList: data, pathToFile: historyDict)
         
         
     }

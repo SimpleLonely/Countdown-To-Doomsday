@@ -17,7 +17,7 @@ class DataManager{
         self.filePath = filePath
     }
     
-    public func saveData(dataList data:[NSObject],pathToFile path:String){
+    public func saveDataToFile(dataList data:[NSObject],pathToFile path:String){
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(data, toFile: path)
         if isSuccessfulSave {
         os_log("Data successfully saved.", log: OSLog.default, type: .debug)
@@ -26,7 +26,7 @@ class DataManager{
         }
     }
     
-    public func loadData(pathToFile path:String) -> [NSObject]?{
+    public func loadDataFromFile(pathToFile path:String) -> [NSObject]?{
         return NSKeyedUnarchiver.unarchiveObject(withFile: path) as? [NSObject]
     }
 }

@@ -16,7 +16,7 @@ class HistoryTableViewController: UITableViewController {
     
     var plistPath:String = String()
     
-    var data:[Int] = []
+    var data:[String] = []
     
     var date:[String] = []
     
@@ -70,7 +70,7 @@ class HistoryTableViewController: UITableViewController {
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        /*let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         plistPath = appDelegate.historyDocPath
         
@@ -78,11 +78,17 @@ class HistoryTableViewController: UITableViewController {
         
         date = dict!.object(forKey: "Date") as! [String]
         
-        data = dict!.object(forKey: "Data") as! [Int]
+        data = dict!.object(forKey: "Data") as! [String]
         
-        for i in 0...date.count{
+        for i in 0...date.count-1{
             historyData.append(HistoryData(date: date[i], amount: data[i]))
         }
+ */
+        
+        
+        let dataManager = DataManager(filePath: HistoryData.ArchiveURL.path)
+        historyData = dataManager.loadDataFromFile(pathToFile: HistoryData.ArchiveURL.path) as! [HistoryData]
+        dataManager.saveDataToFile(dataList: historyData, pathToFile: HistoryData.ArchiveURL.path)
         
         setChart(withCount: historyData.count)
         
