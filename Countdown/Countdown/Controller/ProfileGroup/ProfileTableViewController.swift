@@ -105,6 +105,7 @@ class ProfileTableViewController: UITableViewController {
                     // Do something with credentials e.g.: save them.
                     // Auth0 will automatically dismiss the login page
                     self.defaults.set(true,forKey: "loginStatus")
+                    self.defaults.set("default@mail", forKey: "currentMail")
                     self.credentialsManager.store(credentials: credentials)
                     print("Credentials: \(credentials)")
                 

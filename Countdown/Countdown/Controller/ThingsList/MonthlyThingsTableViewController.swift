@@ -30,9 +30,12 @@ class TodayTableViewController: UITableViewController {
     
     var initialDict:NSMutableDictionary!
     
+    var monthlyData:[MonthlyThing] = []
+    
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder:aDecoder)
+        
         //TODO:Change data format
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
@@ -52,6 +55,14 @@ class TodayTableViewController: UITableViewController {
         
         var initialString = initialDict.object(forKey: "Data") as! [String]
         
+        //TODO: Load from sql
+        
+        for i in 0...thingData.count-1{
+            monthlyData.append(MonthlyThing(thing: thingData[i], amount: String(amountData[i]), tip: tipData[i]))
+        }
+        let dataManager = DataManager(filePath: MonthlyThing.ArchiveURL.path)
+        //var monthlyData = dataManager.loadDataFromFile(pathToFile: MonthlyThing.ArchiveURL.path) as! [MonthlyThing]
+        dataManager.saveDataToFile(dataList: monthlyData, pathToFile: MonthlyThing.ArchiveURL.path)
         
         //将本月的数据默认设为历史数据
         

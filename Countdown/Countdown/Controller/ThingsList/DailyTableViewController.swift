@@ -18,7 +18,8 @@ class DailyTableViewController: UITableViewController {
     
     var plistPath:String!
     
-
+    var dailyData:[DailyThing] = []
+    
     override func viewWillAppear(_ animated: Bool) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
@@ -29,6 +30,14 @@ class DailyTableViewController: UITableViewController {
         questions = dict!.object(forKey: "questions") as! [String]
         
         answers = dict!.object(forKey: "answers") as! [String]
+        
+        for i in 0...questions.count-1{
+            dailyData.append(DailyThing(question: questions[i], answer: answers[i]))
+        }
+        
+        let dataManager = DataManager(filePath: DailyThing.ArchiveURL.path)
+        //dailyData = dataManager.loadDataFromFile(pathToFile: DailyThing.ArchiveURL.path) as! [DailyThing]
+        dataManager.saveDataToFile(dataList: dailyData, pathToFile: DailyThing.ArchiveURL.path)
     }
     
     override func viewDidLoad() {
@@ -86,13 +95,11 @@ class DailyTableViewController: UITableViewController {
         //print (answers[sender.tag])
         
         //TODO: async to sql
+        
         dict?.setValue(answers, forKey: "answers")
         
         dict?.write(toFile: plistPath!, atomically: true)
         
-        //self.tableView.reloadData()
-        
-        //self.refreshControl?.endRefreshing()
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         

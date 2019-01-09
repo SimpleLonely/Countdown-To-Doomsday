@@ -70,7 +70,7 @@ class HistoryTableViewController: UITableViewController {
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        /*let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         plistPath = appDelegate.historyDocPath
         
@@ -81,13 +81,12 @@ class HistoryTableViewController: UITableViewController {
         data = dict!.object(forKey: "Data") as! [String]
         
         for i in 0...date.count-1{
-            historyData.append(HistoryData(date: date[i], amount: data[i]))
+            historyData.append(HistoryData(date: date[i], amount: data[i], mail:"default@mail" ))
         }
- */
-        
+ 
         
         let dataManager = DataManager(filePath: HistoryData.ArchiveURL.path)
-        historyData = dataManager.loadDataFromFile(pathToFile: HistoryData.ArchiveURL.path) as! [HistoryData]
+        //historyData = dataManager.loadDataFromFile(pathToFile: HistoryData.ArchiveURL.path) as! [HistoryData]
         dataManager.saveDataToFile(dataList: historyData, pathToFile: HistoryData.ArchiveURL.path)
         
         setChart(withCount: historyData.count)

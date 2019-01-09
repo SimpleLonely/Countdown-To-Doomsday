@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentT: UILabel!
     @IBOutlet weak var countDown: UILabel!
     
+    let defaults = UserDefaults.standard
+    
     var initialDataPlistPath:String!
     
     var monthlyPlistPath:String!
@@ -110,7 +112,7 @@ class ViewController: UIViewController {
         
         let history = currentCountDown - lastCountDown
         
-        print ("history2:"+String(history))
+        //print ("history2:"+String(history))
         
         currentCountDown = Int((1.5/(0.65-(-0.35-dT(2018.0))))*3650)
         
@@ -138,7 +140,7 @@ class ViewController: UIViewController {
         let P_gas = P(Q: 15*pow(10.0, 15.0), n: 7.125, t12: 2056, tou: 13.97, t: _t)/1000000000000
         //print ("gas"+String(P_gas))
         let p_total = P_coal*0.907*0.5*0.75 + P_oil*0.136*0.84*0.75 + P_gas*0.0189*0.76*0.75
-        print("pTotal:"+String(p_total))
+        //print("pTotal:"+String(p_total))
         return p_total
     }
     
@@ -184,7 +186,7 @@ class ViewController: UIViewController {
     func dT(_ tn:Double) -> Double{
         let k = 3.0/log(2)
         var Cnow = C(tn, reduceCarbon())*0.278
-        print("Cnow:"+String(Cnow))
+        //print("Cnow:"+String(Cnow))
         if Cnow<=0 {
             Cnow = 360
         }
@@ -205,19 +207,8 @@ class ViewController: UIViewController {
         //TODO: async to sql and async to change UI
         
         let queryService = QueryService()
-        var components = URLComponents(string: QueryService.baseURL+"get-history")!
-        components.queryItems = [
-            URLQueryItem(name: "mail", value: "710282573@qq.com"),
-            URLQueryItem(name: "date", value: "7.10")
-        ]
-        queryService.getHistoryItem(request: URLRequest(url: components.url!)){
-            (data, error) -> Void in
-            if error != nil {
-                print(error!)
-            } else {
-                print(data)
-            }
-        }
+        
+        queryService.addHistoryItem(mail: defaults.object(forKey: "currentMail") as! String, date: data[data.count-1].date, amount: data[data.count-1].amount)
         
         dataManager.saveDataToFile(dataList: data, pathToFile: historyDict)
         
