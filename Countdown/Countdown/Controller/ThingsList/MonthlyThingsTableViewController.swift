@@ -26,11 +26,11 @@ class TodayTableViewController: UITableViewController {
     
     var plistPath:String!
     
-    var initialPath:String!
-    
-    var initialDict:NSMutableDictionary!
-    
     var monthlyData:[MonthlyThing] = []
+    
+    var defaults = UserDefaults.standard
+    
+    var time = Time()
     
     required init?(coder aDecoder: NSCoder) {
         
@@ -45,23 +45,41 @@ class TodayTableViewController: UITableViewController {
         
         thingData = dict!.object(forKey: "Thing") as! [String]
         
-        amountData = dict!.object(forKey: "Amount") as! [Float32]
-        
         tipData = dict!.object(forKey: "Tip") as! [String]
         
-        initialPath = appDelegate.initialDocPath
         
-        initialDict = NSMutableDictionary(contentsOfFile: initialPath!)
-        
-        var initialString = initialDict.object(forKey: "Data") as! [String]
-        
-        //TODO: Load from sql
-        
-        for i in 0...thingData.count-1{
-            monthlyData.append(MonthlyThing(thing: thingData[i], amount: String(amountData[i]), tip: tipData[i]))
-        }
         let dataManager = DataManager(filePath: MonthlyThing.ArchiveURL.path)
-        //var monthlyData = dataManager.loadDataFromFile(pathToFile: MonthlyThing.ArchiveURL.path) as! [MonthlyThing]
+        
+        
+        if let preData = dataManager.loadDataFromFile(pathToFile: MonthlyThing.ArchiveURL.path){
+            monthlyData = preData as! [MonthlyThing]
+        }else{
+            let time = Time()
+            let curTime = time.getCurrentTime(currentDate: Date())
+            for i in 0...thingData.count-1{
+                monthlyData.append(MonthlyThing(thing: i,amount: "0",mail: defaults.string(forKey: "currentMail") ?? "default@mail",date: curTime))
+            }
+        }
+        
+
+        if monthlyData == nil || monthlyData[0].amount == "0"{
+            //TODO: load data from sql
+            let queryService = QueryService()
+            queryService.httpRequest(request: queryService.getAllMonthlyDataRequest(mail: defaults.string(forKey: "currentMail") ?? "default@mail", date: defaults.string(forKey: "currentDate") ?? time.getCurrentTime(currentDate: Date())))
+            { (data,error) -> Void in
+                if error != nil {
+                    print(error!)
+                } else {
+                    for item in data{
+                        
+                        //monthlyData[item.date] = item.amount
+                    }
+                    print(data)
+                    
+                }
+            }
+            
+        }
         dataManager.saveDataToFile(dataList: monthlyData, pathToFile: MonthlyThing.ArchiveURL.path)
         
         //将本月的数据默认设为历史数据
@@ -92,22 +110,10 @@ class TodayTableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        plistPath = appDelegate.monthlyThingsPlistPathInDocument
         
         
-        dict = NSMutableDictionary(contentsOfFile: plistPath!)
-        
-        thingData = dict!.object(forKey: "Thing") as! [String]
-        
-        amountData = dict!.object(forKey: "Amount") as! [Float32]
-        
-        tipData = dict!.object(forKey: "Tip") as! [String]
-        
-        
-        self.tableView.reloadData()
     }
+ 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -147,7 +153,7 @@ class TodayTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    //弹出框，来修改数据
+    //Mark:弹出框，来修改数据
     func alert (currentRow cRow: IndexPath){
         let currentTip = tipData[cRow.row]
         
@@ -178,17 +184,13 @@ class TodayTableViewController: UITableViewController {
     //更新所有数据
     func refresh(currentRow cRow:IndexPath,amount toChange:Float)
     {
-        // let path = Bundle.main.path(forResource:"MonthlyThingsDataList",ofType:"plist")
+        let MT = MonthlyThing.ArchiveURL.path
         
-        // let dict = NSDictionary(contentsOfFile: path!)
+        let dataManager = DataManager(filePath:MT)
+        var data = dataManager.loadDataFromFile(pathToFile: MT) as! [MonthlyThing]
         
-        amountData[cRow.row] = toChange
-        
-        // let dicString = dict?.allKeys as! [String]
-        
-        dict?.setValue(amountData, forKey: "Amount")
-        
-        dict?.write(toFile: plistPath!, atomically: true)
+        data[cRow.row].amount = String(toChange)
+        dataManager.saveDataToFile(dataList: data, pathToFile: MT)
         
         self.tableView.reloadData()
         

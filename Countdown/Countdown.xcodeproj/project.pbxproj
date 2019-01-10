@@ -18,10 +18,11 @@
 		04541EE521E3595500E6D482 /* QueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04541EE421E3595500E6D482 /* QueryService.swift */; };
 		04541EEA21E3A76700E6D482 /* MonthlyThingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04541EE921E3A76700E6D482 /* MonthlyThingsData.swift */; };
 		04541EEC21E3A77C00E6D482 /* DailyThingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04541EEB21E3A77C00E6D482 /* DailyThingsData.swift */; };
+		04541EEE21E6C3A200E6D482 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04541EED21E6C3A200E6D482 /* Time.swift */; };
+		04541EF021E70CBD00E6D482 /* FigureCountDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04541EEF21E70CBD00E6D482 /* FigureCountDown.swift */; };
 		0484645B21B0FC5000A04B03 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0484645821B0FBE600A04B03 /* Charts.framework */; };
 		0484645C21B0FC5000A04B03 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0484645821B0FBE600A04B03 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		04E1BB9621B1649900000E3B /* Equipment1TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1BB9521B1649900000E3B /* Equipment1TableViewController.swift */; };
-		04E1BB9821B16E0000000E3B /* HistoryPropertyList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04E1BB9721B16E0000000E3B /* HistoryPropertyList.plist */; };
 		04E1BB9B21B17C3A00000E3B /* DailyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1BB9A21B17C3A00000E3B /* DailyTableViewController.swift */; };
 		04E1BB9D21B17C6200000E3B /* DailyThingsDataList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04E1BB9C21B17C6200000E3B /* DailyThingsDataList.plist */; };
 		04E1BBA021B44A8F00000E3B /* Equipment2TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1BB9F21B44A8F00000E3B /* Equipment2TableViewController.swift */; };
@@ -87,9 +88,10 @@
 		04541EE421E3595500E6D482 /* QueryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryService.swift; sourceTree = "<group>"; };
 		04541EE921E3A76700E6D482 /* MonthlyThingsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyThingsData.swift; sourceTree = "<group>"; };
 		04541EEB21E3A77C00E6D482 /* DailyThingsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyThingsData.swift; sourceTree = "<group>"; };
+		04541EED21E6C3A200E6D482 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
+		04541EEF21E70CBD00E6D482 /* FigureCountDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FigureCountDown.swift; sourceTree = "<group>"; };
 		0484645221B0FBE600A04B03 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../../Downloads/Charts-master/Charts.xcodeproj"; sourceTree = "<group>"; };
 		04E1BB9521B1649900000E3B /* Equipment1TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equipment1TableViewController.swift; sourceTree = "<group>"; };
-		04E1BB9721B16E0000000E3B /* HistoryPropertyList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = HistoryPropertyList.plist; sourceTree = "<group>"; };
 		04E1BB9A21B17C3A00000E3B /* DailyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableViewController.swift; sourceTree = "<group>"; };
 		04E1BB9C21B17C6200000E3B /* DailyThingsDataList.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = DailyThingsDataList.plist; sourceTree = "<group>"; };
 		04E1BB9F21B44A8F00000E3B /* Equipment2TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equipment2TableViewController.swift; sourceTree = "<group>"; };
@@ -187,7 +189,6 @@
 			children = (
 				183B06D721AAD84800200825 /* MonthlyThingsDataList.plist */,
 				04E1BB9C21B17C6200000E3B /* DailyThingsDataList.plist */,
-				04E1BB9721B16E0000000E3B /* HistoryPropertyList.plist */,
 				04428E4421B01A8200494868 /* InitialDataList.plist */,
 			);
 			path = DataLists;
@@ -219,6 +220,8 @@
 				04541EE721E3A37500E6D482 /* Model */,
 				04E1BB9E21B42F9F00000E3B /* DataLists */,
 				04541EDB21D89CC700E6D482 /* Auth0.plist */,
+				04541EEF21E70CBD00E6D482 /* FigureCountDown.swift */,
+				04541EED21E6C3A200E6D482 /* Time.swift */,
 				04541EE421E3595500E6D482 /* QueryService.swift */,
 				18431C8821A5905D00D00AC7 /* AppDelegate.swift */,
 				04541EDE21DA40B800E6D482 /* SessionManager.swift */,
@@ -330,7 +333,6 @@
 				04E1BB9D21B17C6200000E3B /* DailyThingsDataList.plist in Resources */,
 				18431C8E21A5905E00D00AC7 /* Main.storyboard in Resources */,
 				04428E4521B01A8200494868 /* InitialDataList.plist in Resources */,
-				04E1BB9821B16E0000000E3B /* HistoryPropertyList.plist in Resources */,
 				183B06D821AAD84800200825 /* MonthlyThingsDataList.plist in Resources */,
 				04541EDD21D89CC800E6D482 /* Auth0.plist in Resources */,
 			);
@@ -398,10 +400,12 @@
 				04541EE321DA645F00E6D482 /* DataManager.swift in Sources */,
 				04541EEC21E3A77C00E6D482 /* DailyThingsData.swift in Sources */,
 				04541EEA21E3A76700E6D482 /* MonthlyThingsData.swift in Sources */,
+				04541EEE21E6C3A200E6D482 /* Time.swift in Sources */,
 				04E1BB9B21B17C3A00000E3B /* DailyTableViewController.swift in Sources */,
 				04FE9BED21D7AA46004D2D4A /* MyProfileSettingViewController.swift in Sources */,
 				04428E4321B019BA00494868 /* InitialDocTableViewController.swift in Sources */,
 				04541EE521E3595500E6D482 /* QueryService.swift in Sources */,
+				04541EF021E70CBD00E6D482 /* FigureCountDown.swift in Sources */,
 				183A1D9921AC212E000ECFE3 /* InputAlertController.swift in Sources */,
 				04E1BBA021B44A8F00000E3B /* Equipment2TableViewController.swift in Sources */,
 				18431C8B21A5905D00D00AC7 /* ViewController.swift in Sources */,

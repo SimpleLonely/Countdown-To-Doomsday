@@ -17,20 +17,5 @@
 		<string>上月回收废旧金属量</string>
 		<string>上月使用一次性物品量</string>
 	</array>
-	<key>Data</key>
-	<array>
-		<string>1</string>
-		<string>1</string>
-		<string>LED</string>
-		<string>0</string>
-		<string>0</string>
-		<string>0</string>
-		<string>0</string>
-		<string>0</string>
-		<string>0</string>
-		<string>0</string>
-		<string>0</string>
-		<string>0</string>
-	</array>
 </dict>
 </plist>

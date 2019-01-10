@@ -10,13 +10,5 @@
 		<string>使用步行/自行车来代替私家车？</string>
 		<string>使用公共交通来代替私家车？</string>
 	</array>
-	<key>answers</key>
-	<array>
-		<string>N</string>
-		<string>N</string>
-		<string>N</string>
-		<string>N</string>
-		<string>N</string>
-	</array>
 </dict>
 </plist>

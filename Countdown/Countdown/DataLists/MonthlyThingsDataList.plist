@@ -20,14 +20,5 @@
 		<string>回收废旧塑料</string>
 		<string>回收废金属</string>
 	</array>
-	<key>Amount</key>
-	<array>
-		<integer>0</integer>
-		<integer>0</integer>
-		<integer>0</integer>
-		<integer>0</integer>
-		<integer>0</integer>
-		<integer>0</integer>
-	</array>
 </dict>
 </plist>

@@ -28,11 +28,10 @@ class DailyTableViewController: UITableViewController {
         dict = NSMutableDictionary(contentsOfFile: plistPath!)
         
         questions = dict!.object(forKey: "questions") as! [String]
-        
-        answers = dict!.object(forKey: "answers") as! [String]
-        
+
         for i in 0...questions.count-1{
-            dailyData.append(DailyThing(question: questions[i], answer: answers[i]))
+            dailyData.append(DailyThing(question: questions[i], answer:"N"))
+            answers.append("N")
         }
         
         let dataManager = DataManager(filePath: DailyThing.ArchiveURL.path)
