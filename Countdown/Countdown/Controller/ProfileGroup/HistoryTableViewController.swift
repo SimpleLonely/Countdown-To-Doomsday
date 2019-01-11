@@ -125,23 +125,19 @@ class HistoryTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         
-        
+        let time = Time()
         if let temp = dataManager.loadDataFromFile(pathToFile: HistoryData.ArchiveURL.path) {
             historyData =  temp as! [HistoryData]
-        }
-        if historyData.count == 0{
-            loadFromSql()
+        }else{
             if historyData.count == 0{
-                addItemToSql(data: "0")
-                //print("having load from sql")
                 loadFromSql()
+                if historyData.count == 0{
+                    addItemToSql(data: "0")
+                    historyData.append(HistoryData(date: time.getCurrentTime(currentDate: Date()), amount: "0", mail: defaults.string(forKey: "currentMail") ?? "default@mail"))
+                }
             }
         }
-        
-        if let temp = dataManager.loadDataFromFile(pathToFile: HistoryData.ArchiveURL.path) {
-            historyData =  temp as! [HistoryData]
-        }
-        //print("historyData.count",historyData.count)
+        dataManager.saveDataToFile(dataList: historyData, pathToFile: HistoryData.ArchiveURL.path)
         
         setChart(withCount: historyData.count)
         
@@ -178,18 +174,6 @@ class HistoryTableViewController: UITableViewController {
         
         
         return cell
-    }
-    public func saveData() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(historyData, toFile: HistoryData.ArchiveURL.path)
-        if isSuccessfulSave {
-            os_log("Data successfully saved.", log: OSLog.default, type: .debug)
-        } else {
-            os_log("Failed to save datas...", log: OSLog.default, type: .error)
-        }
-    }
-    
-    public func loadData() -> [HistoryData]?  {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: HistoryData.ArchiveURL.path) as? [HistoryData]
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

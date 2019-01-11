@@ -37,9 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let equipments = dict!.object(forKey: "Equipments") as! [String]
         
         for i in 0...equipments.count-1{
-            defaults.set("wait completed..", forKey: "initialDoc-"+String(i))
+            defaults.set("To completed..", forKey: "initialDoc-"+String(i))
         }
-        print("prepare init doc successfully")
     }
     
     func prepareMonthlyThingsPlistForUse(){

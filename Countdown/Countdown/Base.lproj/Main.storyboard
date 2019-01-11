@@ -289,24 +289,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="EquipCell" editingAccessoryType="disclosureIndicator" textLabel="ANU-xW-Di0" detailTextLabel="ffG-T4-1Ih" rowHeight="50" style="IBUITableViewCellStyleValue1" id="xYE-l0-anW">
-                                <rect key="frame" x="0.0" y="28" width="414" height="50"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="EquipCell" editingAccessoryType="disclosureIndicator" textLabel="ANU-xW-Di0" detailTextLabel="ffG-T4-1Ih" rowHeight="62" style="IBUITableViewCellStyleValue1" id="xYE-l0-anW">
+                                <rect key="frame" x="0.0" y="28" width="414" height="62"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xYE-l0-anW" id="KFi-Up-NFq">
-                                    <rect key="frame" x="0.0" y="0.0" width="376" height="49.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="376" height="61.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ANU-xW-Di0">
-                                            <rect key="frame" x="20.000000000000004" y="14.999999999999998" width="33.333333333333336" height="20.333333333333332"/>
+                                            <rect key="frame" x="20.000000000000004" y="21" width="33.333333333333336" height="20.333333333333332"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ffG-T4-1Ih">
-                                            <rect key="frame" x="332" y="14.999999999999998" width="44" height="20.333333333333332"/>
+                                            <rect key="frame" x="343.33333333333331" y="25.999999999999996" width="32.666666666666664" height="14.333333333333334"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>

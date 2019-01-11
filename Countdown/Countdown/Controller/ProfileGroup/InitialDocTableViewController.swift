@@ -13,29 +13,17 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
     func refresh(type: String, indexPath: IndexPath) {
         details[indexPath.section][indexPath.row] = type
         
-        /*
-        var tempDetail:[String] = []
-        for row in details{
-            for e in row{
-                tempDetail.append(e)
-            }
-        }
-        
-        //TODO: change to Userdefaults
-        dict?.setValue(tempDetail, forKey: "Data")
-        
-        tempDetail = []
-        
-        dict?.write(toFile: plistPath, atomically: true)
-        */
         var s=0
         
-        for _ in 0...indexPath.section-1{
-            for _ in 0...details[indexPath.section].count-1{
-                s+=1
+        for i in 0...indexPath.section{
+            if i==indexPath.section{
+                s+=indexPath.row
+            }
+            else{
+                s+=details[i].count
             }
         }
-        s+=indexPath.row
+
         
         defaults.set(type, forKey: "initialDoc-"+String(s))
         
@@ -44,8 +32,6 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
         self.refreshControl?.endRefreshing()
         
     }
-    
-    
     
     var titles:[[String]] = [[],[],[],[],[],[]]
     
@@ -96,7 +82,7 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
                 tempDetails.append(cur)
             }
             else{
-                defaults.set("Wait to be set...", forKey:"initialDoc")
+                defaults.set("Wait..", forKey:"initialDoc")
             }
         }
         
@@ -122,12 +108,14 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
         
         var s=0
         
-        for _ in 0...indexPath.section-1{
-            for _ in 0...details[indexPath.section].count-1{
-                s+=1
+        for i in 0...indexPath.section{
+            if i==indexPath.section{
+                s+=indexPath.row
+            }
+            else{
+                s+=details[i].count
             }
         }
-        s+=indexPath.row
         
         defaults.set(level, forKey: "initialDoc-"+String(s))
         
@@ -142,9 +130,12 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
     {
         var s=0
         
-        for _ in 0...indexPath.section-1{
-            for _ in 0...details[indexPath.section].count-1{
-                s+=1
+        for i in 0...indexPath.section{
+            if i==indexPath.section{
+            s+=indexPath.row
+        }
+        else{
+            s+=details[i].count
             }
         }
         s+=indexPath.row
