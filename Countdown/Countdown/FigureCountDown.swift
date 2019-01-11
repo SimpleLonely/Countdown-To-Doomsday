@@ -17,9 +17,11 @@ class Figure {
     
     var dailyDocSize = 0
     
-    var currentCountDown = 0
+    static var currentCountDown = 0
     
-    var lastCountDown = 0
+    static var lastCountDown = 0
+    
+    static var carReduce = 0.0
     
     var initialString:[String] = []
     
@@ -51,7 +53,6 @@ class Figure {
             total += E(ti)*(0.0875*pow(M_e,(tn-ti)/35600)+0.165*pow(M_e, (tn-ti)/682)+0.733*pow(M_e, (tn-ti)/50.8))
             //print ("totali:"+String(i)+"  "+String(total))
         }
-        print ("total:"+String(total))
         return total
     }
     func C(_ tn:Double,_ delt:Double) -> Double{
@@ -60,55 +61,56 @@ class Figure {
         
         return c
     }
-    func reduceCarbon() -> Double {
-        
-        if (initialDocSize>0 && monthlyDocSize>0){
-            let carBefore = (initialString[7] as NSString).floatValue
-            let carAfter = (monthlyString[2] as NSString).floatValue
-            let oilPerHundMile = (initialString[4] as NSString).floatValue
-            let carReduce = (carBefore-carAfter)*oilPerHundMile/100*(2.7-0.036) * 0.07
-            
-            let elecBefore = (initialString[6] as NSString).floatValue
-            let elecAfter = (monthlyString[1] as NSString).floatValue
-            let elecReduce = (elecBefore-elecAfter)*0.785*0.07
-            
-            let waterBefore = (initialString[5] as NSString).floatValue
-            let waterAfter = (monthlyString[0] as NSString).floatValue
-            let waterReduce = (waterBefore-waterAfter)*0.91*0.07
-            
-            return Double(carReduce+elecReduce+waterReduce)
-        }
-        else{
-            return 0.0
-        }
-    }
     
     func dT(_ tn:Double) -> Double{
         let k = 3.0/log(2)
-        var Cnow = C(tn, reduceCarbon())*0.278
-        //print("Cnow:"+String(Cnow))
+        
+        var Cnow = C(tn, Figure.carReduce)*0.278
+        //每次回到主页面就会重置
+        Figure.carReduce = 0
+        
         if Cnow<=0 {
             Cnow = 360
         }
         return k*(log(Cnow/280))
     }
+    
     func countDown() -> String{
         let f = (1.5/(0.65-(-0.35-dT(2018.0))))*36500
         
-        currentCountDown = 1
         do{
-            currentCountDown = Int(f)
+            Figure.currentCountDown = Int(f)
         };
-        let history = Int(currentCountDown) - lastCountDown
-        /*
-        print ("history1:"+String(history))
-        if history < 5000{
-            updateHistory(days:history)
-        }*/
-        lastCountDown = currentCountDown
-        return String(currentCountDown);
+        let history = Int(Figure.currentCountDown) - Figure.lastCountDown
         
+        print ("history1:",history)
+        if history < 5000 && history > 0{
+            updateHistory(days:history)
+        }
+        Figure.lastCountDown = Figure.currentCountDown
+        return String(Figure.currentCountDown);
     }
+    
+    func updateHistory(days day:Int){
+        var historyData:[HistoryData]=[]
+        let historyDict = HistoryData.ArchiveURL.path
+        let dataManager = DataManager(filePath: historyDict)
+        
+        let time = Time()
+        if let temp = dataManager.loadDataFromFile(pathToFile: HistoryData.ArchiveURL.path) {
+            historyData = temp as! [HistoryData]
+        }else{
+                if historyData.count == 0{
+                    historyData.append(HistoryData(date: time.getCurrentTime(currentDate: Date()), amount: String(day), mail: defaults.string(forKey: "currentMail") ?? "default@mail"))
+                }
+        }
+        
+        //只会在最后一天进行修改
+        let currentData = Int(historyData[historyData.count-1].amount) ?? 0
+        historyData[historyData.count-1].amount = String( currentData + day)
+        dataManager.saveDataToFile(dataList: historyData, pathToFile: historyDict)
+    }
+
     init() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
@@ -128,30 +130,6 @@ class Figure {
         
         monthlyDocSize = monthly.count
         
-        //MARK: handle initial docs
-        for i in 0...initialDocSize-1{
-            if let temp = defaults.string(forKey: "initialDoc-"+String(i)){
-                initialString.append(temp)
-            }
-        }
-        if initialString.count == 0{
-            initialDocSize = 0
-        }
-        
-        //MARK: handle monthly things datas
-        let dataManager = DataManager(filePath: MonthlyThing.ArchiveURL.path)
-        
-        var monthlyData:[MonthlyThing] = []
-        
-        if let preData = dataManager.loadDataFromFile(pathToFile: MonthlyThing.ArchiveURL.path){
-            monthlyData = preData as! [MonthlyThing]
-            for item in monthlyData{
-                monthlyString.append(item.amount)
-            }
-        }else{
-            monthlyDocSize = 0;
-        }
-        
-        
     }
+    
 }

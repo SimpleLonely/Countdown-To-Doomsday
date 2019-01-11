@@ -51,23 +51,23 @@ class TodayTableViewController: UITableViewController {
     func initData(){
         let dataManager = DataManager(filePath: MonthlyThing.ArchiveURL.path)
         
-        loadDataFromSql()
         if (monthlyData.count==0){
-            print ("Load from file")
+            print ("Monthly Data: Load from file")
             if let preData = dataManager.loadDataFromFile(pathToFile: MonthlyThing.ArchiveURL.path){
                 monthlyData = preData as! [MonthlyThing]
             }else{
-                let time = Time()
-                let curTime = time.getCurrentTime(currentDate: Date())
-                for i in 0...thingData.count-1{
-                    monthlyData.append(MonthlyThing(thing: String(i),amount: "0",mail: defaults.string(forKey: "currentMail") ?? "default@mail",date: curTime))
+                loadDataFromSql()
+                if (monthlyData.count == 0){
+                    let time = Time()
+                    let curTime = time.getCurrentTime(currentDate: Date())
+                    for i in 0...thingData.count-1{
+                        monthlyData.append(MonthlyThing(thing: String(i),amount: "0",mail: defaults.string(forKey: "currentMail") ?? "default@mail",date: curTime))
+                    }
                 }
             }
         }
         
-        
         dataManager.saveDataToFile(dataList: monthlyData, pathToFile: MonthlyThing.ArchiveURL.path)
-        //TODO: add async
         for i in 0...monthlyData.count-1{
             uploadToSql(thingNum: i, amount: monthlyData[i].amount)
         }
@@ -109,7 +109,6 @@ class TodayTableViewController: UITableViewController {
     }
     override func viewDidLoad() {
         
-        
         initData()
         
         super.viewDidLoad()
@@ -140,14 +139,6 @@ class TodayTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleCell", for: indexPath)
 
-        //let item = items[indexPath.row]
-        
-        //let label1 = cell.textLabel
-        //label1?.text = thingData[indexPath.row]
-        
-        //let label2 = cell.detailTextLabel
-        //label2?.text = String (amountData[indexPath.row])
-        //let firstArray = notesArray.object(at: 0) as! Array<String>
         cell.textLabel!.text = thingData[indexPath.row]
         cell.detailTextLabel!.text = String(monthlyData[indexPath.row].amount)
         
@@ -209,60 +200,64 @@ class TodayTableViewController: UITableViewController {
         
         let dataManager = DataManager(filePath:MT)
     
+        
+        let before = Float(monthlyData[cRow.row].amount) ?? 0.0
+        
+        //更新Carbon reduce
+        if (cRow.row == 2){
+            //
+            let carBefore = getInitialDoc(index: 7)
+            let carAfter = toChange
+            let oilPerHundMile = getInitialDoc(index: 4)
+            if (carBefore != 0.0 && oilPerHundMile != 0.0){
+                Figure.carReduce += Double((carBefore-carAfter)*oilPerHundMile/100*(2.7-0.036) * 0.07)
+                
+            }
+            print (Figure.carReduce)
+        }
+        else if (cRow.row == 1){
+            let elecBefore = getInitialDoc(index:6)
+            let elecAfter = toChange
+            if (elecBefore != 0.0){
+                Figure.carReduce += Double((elecBefore-elecAfter)*0.785*0.07)
+            }
+            print (Figure.carReduce)
+        }
+        else if (cRow.row == 0){
+            let waterBefore = getInitialDoc(index:5)
+            let waterAfter = toChange
+            if (waterBefore != 0.0){
+                Figure.carReduce += Double((waterBefore-waterAfter)*0.91*0.07)
+            }
+            print (Figure.carReduce)
+        }else if (cRow.row == 3){
+            //回收废纸
+            Figure.carReduce -= Double(1.534/120 * (toChange-before))
+        }else if (cRow.row == 4){
+            //回收废旧塑料
+            Figure.carReduce -= Double(1.6/120 * (toChange - before))
+        }else if (cRow.row == 5){
+            //回收废金属
+            Figure.carReduce -= Double(2.13/120 * (toChange - before))
+        }
         monthlyData[cRow.row].amount = String(toChange)
         
         dataManager.saveDataToFile(dataList: monthlyData, pathToFile: MT)
         
         uploadToSql(thingNum: cRow.row, amount: String(toChange))
         
+        
         self.tableView.reloadData()
         
         self.refreshControl?.endRefreshing()
     }
     
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    func getInitialDoc(index:Int) -> Float{
+        if let temp = defaults.string(forKey: "initialDoc-"+String(index)){
+            let doubleValue = (temp as NSString).floatValue
+            return doubleValue
+            
+        }
+        return 0.0
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

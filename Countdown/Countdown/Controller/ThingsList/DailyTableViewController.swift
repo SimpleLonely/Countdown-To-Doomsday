@@ -24,16 +24,7 @@ class DailyTableViewController: UITableViewController {
     
     let dataManger = DataManager(filePath: DailyThing.ArchiveURL.path)
     
-    override func viewWillAppear(_ animated: Bool) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        plistPath = appDelegate.dailyThingsPlistPathInDocument
-        
-        dict = NSMutableDictionary(contentsOfFile: plistPath!)
-        
-        questions = dict!.object(forKey: "questions") as! [String]
-
-        
+    fileprivate func initData() {
         let dataManager = DataManager(filePath: DailyThing.ArchiveURL.path)
         if let preData = dataManager.loadDataFromFile(pathToFile: DailyThing.ArchiveURL.path) as? [DailyThing]{
             dailyData = preData
@@ -44,22 +35,29 @@ class DailyTableViewController: UITableViewController {
                 for i in 0...questions.count-1{
                     dailyData.append(DailyThing(question: questions[i], answer:"N",mail:defaults.string(forKey: "currentMail") ?? "default@mail",date: time.getCurrentTime(currentDate: Date())))
                     answers.append("N")
-                    }
+                }
             }
             dataManager.saveDataToFile(dataList: dailyData, pathToFile: DailyThing.ArchiveURL.path)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        plistPath = appDelegate.dailyThingsPlistPathInDocument
+        
+        dict = NSMutableDictionary(contentsOfFile: plistPath!)
+        
+        questions = dict!.object(forKey: "questions") as! [String]
+
+        initData()
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
+        }
 
     // MARK: - Table view data source
 
@@ -129,12 +127,17 @@ class DailyTableViewController: UITableViewController {
     }
     
     @objc func switchChanged(_ sender : UISwitch!) -> Void {
-        //print("table row switch Changed \(sender.tag)")
-        //print("The switch is \(sender.isOn ? "ON" : "OFF")")
         
         dailyData[sender.tag].answer = (sender.isOn ? "Y":"N")
         
         uploadToSql(question: sender.tag, answer: dailyData[sender.tag].answer)
+        
+        if (sender.isOn ){
+            Figure.carReduce -= 5
+        }
+        else{
+            Figure.carReduce += 5
+        }
         
         dataManger.saveDataToFile(dataList: dailyData, pathToFile: DailyThing.ArchiveURL.path)
         
@@ -145,96 +148,5 @@ class DailyTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    //弹出框，来修改数据
-    /*func alert (currentRow cRow: IndexPath){
-        let currentTip = tipData[cRow.row]
-        
-        let alertController = UIAlertController(title: currentTip, message: " ", preferredStyle: .alert)
-        
-        alertController.addTextField { (textField:UITextField) -> Void in
-            textField.placeholder = "请输入..."
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        let confirmAction = UIAlertAction (title: "Confirm", style: .default) { (action) in
-            
-            let amount = alertController.textFields![0]
-            
-            self.refresh(currentRow: cRow, amount: ((amount.text)! as NSString).floatValue)
-            
-        }
-        
-        alertController.addAction(cancelAction)
-        
-        alertController.addAction(confirmAction)
-        
-        self.present(alertController,animated: true,completion: nil)
-        
-    }
-    */
-    
-    //更新所有数据
-    /*func refresh(currentRow cRow:IndexPath,amount toChange:Float)
-    {
-        // let path = Bundle.main.path(forResource:"MonthlyThingsDataList",ofType:"plist")
-        
-        // let dict = NSDictionary(contentsOfFile: path!)
-        
-        amountData[cRow.row] = toChange
-        
-        // let dicString = dict?.allKeys as! [String]
-        
-        dict?.setValue(amountData, forKey: "Amount")
-        
-        dict?.write(toFile: plistPath!, atomically: true)
-        
-        self.tableView.reloadData()
-        
-        self.refreshControl?.endRefreshing()
-    }*/
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

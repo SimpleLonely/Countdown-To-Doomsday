@@ -10,6 +10,18 @@ import Foundation
 class QueryService{
     static let baseURL = "http://47.106.153.201:8080/"
     
+    static func isAppAlreadyLaunchedOnce()->Bool{
+        let defaults = UserDefaults.standard
+        if let _ = defaults.string(forKey: "isAppAlreadyLaunchedOnce"){
+            print("App already launched")
+            return true
+        }else{
+            defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
+            print("App launched first time")
+            return false
+        }
+    }
+    
     public func httpRequest(request: URLRequest!, callback: @escaping (String, String?) -> Void){
         let session = URLSession.shared
         let task = session.dataTask(with: request){

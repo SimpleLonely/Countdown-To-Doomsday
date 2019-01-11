@@ -29,7 +29,7 @@ class HistoryTableViewController: UITableViewController {
     let dataManager = DataManager(filePath: HistoryData.ArchiveURL.path)
     
     
-    //设置表格的相关属性
+    //MARK:设置表格的相关属性
     func setChart(withCount count:Int){
         barChartView.noDataText = "You have not any contributions."
         
@@ -74,7 +74,8 @@ class HistoryTableViewController: UITableViewController {
         barChartView.data=datas
         
     }
-    
+    //MARK: 更新/添加一条历史记录
+    //默认以当前时间和当前用户
     func addItemToSql(data:String){
         let queryService = QueryService()
         let time = Time()
@@ -114,30 +115,31 @@ class HistoryTableViewController: UITableViewController {
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        
-        if let temp = dataManager.loadDataFromFile(pathToFile: HistoryData.ArchiveURL.path) {
-            historyData =  temp as! [HistoryData]
-        }
-        //print("historyData.count",historyData.count)
-        
+        initData()
         setChart(withCount: historyData.count)
     }
     
-    override func viewDidLoad() {
+    
+    func initData(){
         
         let time = Time()
         if let temp = dataManager.loadDataFromFile(pathToFile: HistoryData.ArchiveURL.path) {
             historyData =  temp as! [HistoryData]
-        }else{
-            if historyData.count == 0{
-                loadFromSql()
-                if historyData.count == 0{
-                    addItemToSql(data: "0")
-                    historyData.append(HistoryData(date: time.getCurrentTime(currentDate: Date()), amount: "0", mail: defaults.string(forKey: "currentMail") ?? "default@mail"))
-                }
-            }
         }
+        if historyData.count == 0{
+            loadFromSql()
+        }
+        if historyData.count == 0{
+            addItemToSql(data: "0")
+            historyData.append(HistoryData(date: time.getCurrentTime(currentDate: Date()), amount: "0", mail: defaults.string(forKey: "currentMail") ?? "default@mail"))
+        }
+        
         dataManager.saveDataToFile(dataList: historyData, pathToFile: HistoryData.ArchiveURL.path)
+        
+    }
+    override func viewDidLoad() {
+        
+        initData()
         
         setChart(withCount: historyData.count)
         

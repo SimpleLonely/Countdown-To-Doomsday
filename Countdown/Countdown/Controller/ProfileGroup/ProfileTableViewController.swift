@@ -61,15 +61,10 @@ class ProfileTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //拿到storyBoard
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        //拿到ViewController
+    
         let equipmentsPage = storyBoard.instantiateViewController(withIdentifier:"MyEquipments") as! InitialDocTableViewController
-        //传值
-        // nextPage.id = joinUsDataArray[indexPath.row].id
-        // nextPage.titleOfNavi.title = joinUsDataArray[indexPath.row].title
-        //跳转
-        //self.navigationController?.pushViewController(nextPage, animated: true)
+        
         let historyPage = storyBoard.instantiateViewController(withIdentifier:"History") as! HistoryTableViewController
         
         let myProfilePage = storyBoard.instantiateViewController(withIdentifier: "MyProfilePage") as! MyProfileSettingViewController

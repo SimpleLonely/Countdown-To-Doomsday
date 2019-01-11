@@ -10,28 +10,6 @@ import UIKit
 
 
 class InitialDocTableViewController: UITableViewController,levelDelegte,typeDelegte{
-    func refresh(type: String, indexPath: IndexPath) {
-        details[indexPath.section][indexPath.row] = type
-        
-        var s=0
-        
-        for i in 0...indexPath.section{
-            if i==indexPath.section{
-                s+=indexPath.row
-            }
-            else{
-                s+=details[i].count
-            }
-        }
-
-        
-        defaults.set(type, forKey: "initialDoc-"+String(s))
-        
-        self.tableView.reloadData()
-        
-        self.refreshControl?.endRefreshing()
-        
-    }
     
     var titles:[[String]] = [[],[],[],[],[],[]]
     
@@ -45,7 +23,13 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
     
     let defaults = UserDefaults.standard
     
-
+    func prepareInitialDoc(n:Int){
+        
+        for i in 0...n-1{
+            defaults.set("To completed..", forKey: "initialDoc-"+String(i))
+        }
+    }
+    
     //Declare the monthly things
     override func viewWillAppear(_ animated: Bool) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -54,8 +38,10 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
         
         dict = NSMutableDictionary(contentsOfFile: plistPath)
         
+        
         let tempString = dict!.object(forKey: "Equipments") as! [String]
-
+        
+        
         titles = [[],[],[],[],[],[]]
         
         details = [[],[],[],[],[],[]]
@@ -77,13 +63,16 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
         titles[4].append(tempString[11])
         
         var tempDetails:[String] = []
+        //如果应用第一次启动，将initdoc初始化
         for i in 0...tempString.count-1{
             if let cur = defaults.string(forKey: "initialDoc-"+String(i)){
-                tempDetails.append(cur)
+                 tempDetails.append(cur)
             }
             else{
-                defaults.set("Wait..", forKey:"initialDoc")
+                defaults.set("To complete..", forKey:"initialDoc-"+String(i))
+                tempDetails.append("To complete..")
             }
+            
         }
         
         details[0].append(tempDetails[0])
@@ -103,7 +92,29 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
         details[4].append(tempDetails[10])
         details[4].append(tempDetails[11])
     }
-    
+    //更新种类
+    func refresh(type: String, indexPath: IndexPath) {
+        details[indexPath.section][indexPath.row] = type
+        
+        var s=0
+        
+        for i in 0...indexPath.section{
+            if i==indexPath.section{
+                s+=indexPath.row
+            }
+            else{
+                s+=details[i].count
+            }
+        }
+        
+        defaults.set(type, forKey: "initialDoc-"+String(s))
+        
+        self.tableView.reloadData()
+        
+        self.refreshControl?.endRefreshing()
+        
+    }
+    //更新能源等级
     func refresh(level: Int, indexPath: IndexPath) {
         
         var s=0
@@ -125,20 +136,19 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
         
     }
     
-    //更新所有数据
+    //更新数据
     func refresh(currentRow indexPath:IndexPath,toChange c:String)
     {
         var s=0
         
         for i in 0...indexPath.section{
             if i==indexPath.section{
-            s+=indexPath.row
-        }
-        else{
-            s+=details[i].count
+                s+=indexPath.row
+            }
+            else{
+                s+=details[i].count
             }
         }
-        s+=indexPath.row
         
         details[indexPath.section][indexPath.row] = c
         
@@ -266,49 +276,5 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
         }
         return true
     }
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
