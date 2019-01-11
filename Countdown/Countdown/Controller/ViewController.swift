@@ -15,11 +15,24 @@ class ViewController: UIViewController {
     @IBOutlet weak var countDown: UILabel!
     
     
+    @IBOutlet weak var circle: UIImageView!
     let defaults = UserDefaults.standard
     
+    func rotate1(imageView: UIImageView, aCircleTime: Double) { //CABasicAnimation
+        
+        let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
+        rotationAnimation.fromValue = 0.0
+        rotationAnimation.toValue = -Double.pi * 2 //Minus can be Direction
+        rotationAnimation.duration = aCircleTime
+        rotationAnimation.repeatCount = .infinity
+        imageView.layer.add(rotationAnimation, forKey: nil)
+    }
     override func viewWillAppear(_ animated: Bool) {
         
+        rotate1(imageView: circle, aCircleTime: 10)
+        
         let figure = Figure()
+        
         
         let result = figure.countDown()
         

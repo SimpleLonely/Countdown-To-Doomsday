@@ -93,6 +93,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="circle" destination="Hyi-uf-b5Z" id="TQj-3b-EsY"/>
                         <outlet property="countDown" destination="hFW-BO-Ime" id="UZr-pj-viZ"/>
                         <outlet property="currentT" destination="rDX-Mm-c93" id="ZNz-V3-x5F"/>
                     </connections>
