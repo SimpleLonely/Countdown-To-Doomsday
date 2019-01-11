@@ -19,11 +19,6 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        UserDefaults.standard.set(true, forKey: "loginStatus")
-        
-        UserDefaults.standard.set("MyName", forKey: "Name")
-        
-        UserDefaults.standard.set("My Introduction", forKey: "Introduction")
         
         let figure = Figure()
         

@@ -30,6 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func prepareInitialDoc(){
         
+        UserDefaults.standard.set(false, forKey: "loginStatus")
+        
         let plistPath = initialDocPath
         
         let dict = NSMutableDictionary(contentsOfFile: plistPath)

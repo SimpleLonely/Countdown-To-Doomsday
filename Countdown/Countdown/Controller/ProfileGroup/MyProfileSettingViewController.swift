@@ -7,12 +7,26 @@
 //
 
 import UIKit
+import Auth0
 
 class MyProfileSettingViewController: UIViewController {
 
+    @IBOutlet weak var mail: UILabel!
     let userDefault = UserDefaults.standard
     @IBOutlet weak var nickName: UILabel!
+    var profile:UserInfo?
+    
     override func viewDidLoad() {
+        
+        profile = SessionManager.shared.profile
+        if let temp = profile{
+            nickName.text = temp.name
+            mail.text = userDefault.string(forKey: "currentMail")
+        }
+        else{
+            nickName.text = "Guest"
+            mail.text = "点击修改，添加默认邮箱"
+        }
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -26,7 +40,7 @@ class MyProfileSettingViewController: UIViewController {
     @IBOutlet weak var introduction: UILabel!
     
     @IBAction func modifyName(_ sender: Any) {
-        alert(tip: "请修改")
+        alert(tip: "请修改您的昵称或邮箱")
     }
     func alert (tip currentString:String){
         
@@ -44,7 +58,13 @@ class MyProfileSettingViewController: UIViewController {
         
         let confirmAction = UIAlertAction (title: "Confirm", style: .default) { (action) in
             
-            self.nickName.text = alertController.textFields![0].text
+            self.nickName.text = (alertController.textFields![0].text == "" ? self.nickName.text:alertController.textFields![0].text)
+            
+            
+            self.introduction.text = (alertController.textFields![1].text == "" ? self.introduction.text:alertController.textFields![1].text)
+            
+            self.userDefault.set(self.introduction.text ?? "default@mail", forKey: "currentMail")
+            
             
         }
         

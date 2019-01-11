@@ -234,6 +234,7 @@
                     </view>
                     <connections>
                         <outlet property="introduction" destination="ma4-GC-ucm" id="TYe-FL-Zd2"/>
+                        <outlet property="mail" destination="ma4-GC-ucm" id="c4I-6V-lXK"/>
                         <outlet property="nickName" destination="0H2-mH-q6h" id="BrB-kj-eEQ"/>
                     </connections>
                 </viewController>

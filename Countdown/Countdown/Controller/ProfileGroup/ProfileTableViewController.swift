@@ -15,6 +15,8 @@ class ProfileTableViewController: UITableViewController {
     // Create an instance of the credentials manager for storing credentials
     let credentialsManager = CredentialsManager(authentication: Auth0.authentication())
 
+    var profile:UserInfo!
+    
     @IBOutlet weak var myHeadhot: UIImageView!
     
     let name:[String] = ["我的账户","历史贡献","初始档案"]
@@ -79,6 +81,7 @@ class ProfileTableViewController: UITableViewController {
             }
             else{
                 showLoginPage()
+                self.navigationController?.pushViewController(myProfilePage, animated: true)
             }
             break
         case 1:
@@ -105,9 +108,19 @@ class ProfileTableViewController: UITableViewController {
                     // Do something with credentials e.g.: save them.
                     // Auth0 will automatically dismiss the login page
                     self.defaults.set(true,forKey: "loginStatus")
-                    self.defaults.set("default@mail", forKey: "currentMail")
-                    self.credentialsManager.store(credentials: credentials)
-                    print("Credentials: \(credentials)")
+                    self.defaults.set(credentials.idToken, forKey: "currentMail")
+                    if (!SessionManager.shared.store(credentials: credentials)){
+                        print ("Failed to store credentials")
+                    }
+                    SessionManager.shared.retrieveProfile { error in
+                        DispatchQueue.main.async {
+                            guard error == nil else {
+                                print("Failed to retrieve profile: \(String(describing: error))")
+                                return self.showLoginPage()
+                            }
+                            //self.performSegue(withIdentifier: "MyProfilePage", sender: nil)
+                        }
+                    }
                 
                 }
         }
