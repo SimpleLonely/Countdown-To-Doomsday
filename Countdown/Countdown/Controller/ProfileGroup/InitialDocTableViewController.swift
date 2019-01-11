@@ -243,8 +243,9 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
         let confirmAction = UIAlertAction (title: "Confirm", style: .default) { (action) in
             
             let amount = alertController.textFields![0]
-            
-            self.refresh(currentRow: cRow, toChange: amount.text!)
+            if (self.isValidInput(string: amount.text!)){
+                self.refresh(currentRow: cRow, toChange: amount.text!)
+            }
             
         }
         
@@ -254,6 +255,16 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
         
         self.present(alertController,animated: true,completion: nil)
         
+    }
+    
+    func isValidInput(string:String) -> Bool{
+        let length = string.lengthOfBytes(using: String.Encoding.utf8)
+            for loopIndex in 0..<length {
+            let char = (string as NSString).character(at: loopIndex)
+            if char < 48 && char != 46 {return false }
+            if char > 57 && char != 46 {return false }
+        }
+        return true
     }
     /*
     // Override to support conditional editing of the table view.

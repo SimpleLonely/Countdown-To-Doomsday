@@ -4,4 +4,5 @@ use_frameworks!
 
 target 'Countdown' do
  pod 'Auth0', '~> 1.5'
+pod 'InputKitSwift', '~> 1.1.16'
 end

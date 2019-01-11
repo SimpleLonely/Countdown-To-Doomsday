@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import InputKitSwift
 
 @IBDesignable
 class TodayTableViewController: UITableViewController {
@@ -86,7 +87,7 @@ class TodayTableViewController: UITableViewController {
                     let item = item as! NSDictionary
                     self.monthlyData[item.value(forKey: "thing") as! Int].amount = item.value(forKey: "amount") as! String
                 }
-                print ("Initial load data",self.monthlyData)
+                //print ("Initial load data",self.monthlyData)
             }
         }
     }
@@ -167,15 +168,19 @@ class TodayTableViewController: UITableViewController {
         let alertController = UIAlertController(title: currentTip, message: " ", preferredStyle: .alert)
         
         alertController.addTextField { (textField:UITextField) -> Void in
-            textField.placeholder = "请输入..."
+            
+            textField.placeholder = "请输入数字..."
         }
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         let confirmAction = UIAlertAction (title: "Confirm", style: .default) { (action) in
             
             let amount = alertController.textFields![0]
             
-            self.refresh(currentRow: cRow, amount: ((amount.text)! as NSString).floatValue)
+            if (self.isValidInput(string: amount.text!)){
+                self.refresh(currentRow: cRow, amount: ((amount.text)! as NSString).floatValue)
+            }
             
         }
         
@@ -187,6 +192,15 @@ class TodayTableViewController: UITableViewController {
         
     }
     
+    func isValidInput(string:String) -> Bool{
+        let length = string.lengthOfBytes(using: String.Encoding.utf8)
+            for loopIndex in 0..<length {
+            let char = (string as NSString).character(at: loopIndex)
+            if char < 48 && char != 46 {return false }
+            if char > 57 && char != 46 {return false }
+        }
+        return true
+    }
     
     //更新所有数据
     func refresh(currentRow cRow:IndexPath,amount toChange:Float)

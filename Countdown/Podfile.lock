@@ -1,20 +1,24 @@
 PODS:
   - Auth0 (1.14.0):
     - SimpleKeychain
+  - InputKitSwift (1.1.19)
   - SimpleKeychain (0.8.1)
 
 DEPENDENCIES:
   - Auth0 (~> 1.5)
+  - InputKitSwift (~> 1.1.16)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Auth0
+    - InputKitSwift
     - SimpleKeychain
 
 SPEC CHECKSUMS:
   Auth0: 6ba27a720fe99ccf2fd4c69c051948d4036ac26d
+  InputKitSwift: ceaf0ab41d0dad15537f43f027c6af62a9ebf7e4
   SimpleKeychain: e2485c28d82fcece35e9e41faeac42ebfe614815
 
-PODFILE CHECKSUM: 440761251f4edc809824ebbb7a92ef3c6d92ec8e
+PODFILE CHECKSUM: 03e4bf370a53c296dba3373f329bcf78f580afc1
 
 COCOAPODS: 1.5.3

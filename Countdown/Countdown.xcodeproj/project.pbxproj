@@ -373,6 +373,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Countdown/Pods-Countdown-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Auth0/Auth0.framework",
+				"${BUILT_PRODUCTS_DIR}/InputKitSwift/InputKitSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -380,6 +381,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Auth0.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InputKitSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleKeychain.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
