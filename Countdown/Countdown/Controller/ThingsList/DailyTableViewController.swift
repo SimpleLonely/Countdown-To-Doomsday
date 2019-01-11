@@ -125,7 +125,7 @@ class DailyTableViewController: UITableViewController {
         
         return cell
     }
-    
+    //检测switcher是否发生改变
     @objc func switchChanged(_ sender : UISwitch!) -> Void {
         
         dailyData[sender.tag].answer = (sender.isOn ? "Y":"N")

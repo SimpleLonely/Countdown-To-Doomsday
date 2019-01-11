@@ -8,6 +8,9 @@
 
 import UIKit
 
+//http://www.roperld.com/science/globalwarmingmathematics.htm
+//use equation of this page
+//to figure a rough result
 class Figure {
     let defaults = UserDefaults.standard
 

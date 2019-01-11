@@ -160,14 +160,13 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
     }
     
 
-    // 設置每個 section 的 title 為一個 UIView
-    // 如果實作了這個方法 會蓋過單純設置文字的 section title
+    //设置每个section的标题
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return  sectionTitles[section]
     }
     
     
-    // 設置 section header 的高度
+    // 设置 section header 的高度
     override func tableView(_ tableView: UITableView,
                    heightForHeaderInSection section: Int) -> CGFloat {
         return 27
@@ -185,7 +184,6 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return titles.count
@@ -196,7 +194,7 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
         return titles[section].count
     }
 
-    
+    //Set table cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EquipCell", for: indexPath)
 
@@ -210,17 +208,14 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
         return cell
     }
     
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         //拿到storyBoard
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        //拿到ViewController
         //传值
-        
-        
         if (indexPath.section == 0){
             let equipmentPage = storyBoard.instantiateViewController(withIdentifier:"Equipment1") as! Equipment1TableViewController
-            //equipmentPage.title? = titles[indexPath.section][indexPath.row]
+
             equipmentPage.currentIndexPath = indexPath
             equipmentPage.delegate = self
             

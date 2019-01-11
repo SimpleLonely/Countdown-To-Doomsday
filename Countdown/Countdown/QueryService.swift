@@ -45,16 +45,7 @@ class QueryService{
         //request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "GET"
         return request
-        /*httpRequest(request: request){
-            (data, error) -> Void in
-            if error != nil {
-                print(error!)
-            } else {
-                //TODO: decode to json
-                //TODO: return to main
-                print(data)
-            }
-        }*/
+    
     }
     
     public func addHistoryItemRequest(mail:String,date:String,amount:String) -> URLRequest{
@@ -70,14 +61,7 @@ class QueryService{
         //request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
         return request
-        /*httpRequest(request: request){
-            (data, error) -> Void in
-            if error != nil {
-                print(error!)
-            } else {
-                print(data)
-            }
-        }*/
+
     }
     
     public func getAllMonthlyDataRequest(mail:String,date:String ) -> URLRequest{
@@ -162,6 +146,15 @@ class QueryService{
             URLQueryItem(name: "question", value: String(question))
         ]
         
+        var request = URLRequest (url: components.url!)
+        //request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "GET"
+        return request
+    }
+    
+    public func getTemperature() -> URLRequest{
+        var components = URLComponents(string: QueryService.baseURL+"get-temperature")!
+      
         var request = URLRequest (url: components.url!)
         //request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "GET"

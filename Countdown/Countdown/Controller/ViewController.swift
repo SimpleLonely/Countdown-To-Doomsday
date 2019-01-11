@@ -31,12 +31,13 @@ class ViewController: UIViewController {
         
         rotate1(imageView: circle, aCircleTime: 10)
         
-        
         let figure = Figure()
         
         let result = figure.countDown()
         
         countDown.text = result+"天"
+        
+        getCurrentTemperature()
         
         if QueryService.isAppAlreadyLaunchedOnce(){
             defaults.set(false, forKey: "loginStatus")
@@ -73,6 +74,23 @@ class ViewController: UIViewController {
         
         self.present(alertController,animated: true,completion: nil)
         
+    }
+    func  getCurrentTemperature()  {
+        let queryService = QueryService()
+        queryService.httpRequest(request: queryService.getTemperature())
+        { (data,error) -> Void in
+            if error != nil {
+                print(error!)
+            } else {
+                let dataAfter = data.data(using: String.Encoding.utf8)
+                let jsonDic = try! JSONSerialization.jsonObject(with: dataAfter!,                                         options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
+                let dataValue = jsonDic.value(forKey: "data") as! Double
+                let toDisplay = String(format: "%.2f", dataValue*0.1)
+                DispatchQueue.main.async {
+                    self.currentT.text = "+"+String(toDisplay)+"摄氏度"
+                }
+            }
+        }
     }
     
 }

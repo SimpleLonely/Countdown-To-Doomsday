@@ -9,6 +9,9 @@
 import UIKit
 import Auth0
 
+
+//设置页面
+//只有三个 cell，UI设计的不太好
 @IBDesignable
 class ProfileTableViewController: UITableViewController {
     
@@ -37,28 +40,26 @@ class ProfileTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return name.count
     }
 
-    
+    //set cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "OneLable", for: indexPath)
 
-        // Configure the cell...
         let label = cell.textLabel
         label!.text = name[indexPath.row]
         
         return cell
     }
     
+    //prepare to segue
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
@@ -85,10 +86,12 @@ class ProfileTableViewController: UITableViewController {
         case 2:
             self.navigationController?.pushViewController(equipmentsPage, animated: true)
         default:
-            print ("outOfIndex")
+            print ("OutOfIndex")
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    //Use Auth0 to login
     func showLoginPage(){
         Auth0
             .webAuth()
@@ -100,7 +103,6 @@ class ProfileTableViewController: UITableViewController {
                     // Handle the error
                     print("Error: \(error)")
                 case .success(let credentials):
-                    // Do something with credentials e.g.: save them.
                     // Auth0 will automatically dismiss the login page
                     self.defaults.set(true,forKey: "loginStatus")
                     self.defaults.set(credentials.idToken, forKey: "currentMail")
@@ -113,56 +115,11 @@ class ProfileTableViewController: UITableViewController {
                                 print("Failed to retrieve profile: \(String(describing: error))")
                                 return self.showLoginPage()
                             }
-                            //self.performSegue(withIdentifier: "MyProfilePage", sender: nil)
                         }
                     }
                 
                 }
         }
     }
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }

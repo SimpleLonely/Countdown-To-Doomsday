@@ -17,7 +17,7 @@ class MyProfileSettingViewController: UIViewController {
     var profile:UserInfo?
     
     override func viewDidLoad() {
-        
+        //因为登陆后的异步请求所以遗留了刷新方面的问题。。
         profile = SessionManager.shared.profile
         if let temp = profile{
             nickName.text = temp.name
@@ -29,7 +29,6 @@ class MyProfileSettingViewController: UIViewController {
         }
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func LogOut(_ sender: Any) {
@@ -75,15 +74,5 @@ class MyProfileSettingViewController: UIViewController {
         self.present(alertController,animated: true,completion: nil)
         
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -113,12 +113,7 @@ class TodayTableViewController: UITableViewController {
         
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
+   }
 
  
     // MARK: - Table view data source
@@ -135,7 +130,7 @@ class TodayTableViewController: UITableViewController {
         return thingData.count
     }
 
-    
+    // Set cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleCell", for: indexPath)
 
@@ -161,7 +156,7 @@ class TodayTableViewController: UITableViewController {
         
         return cell
     }
-    
+    //modify datas
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         alert(currentRow: indexPath)
