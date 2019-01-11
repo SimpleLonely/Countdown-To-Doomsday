@@ -29,4 +29,34 @@ class DataManager{
     public func loadDataFromFile(pathToFile path:String) -> [NSObject]?{
         return NSKeyedUnarchiver.unarchiveObject(withFile: path) as? [NSObject]
     }
+    public func loadDataFromFile(pathToFile path:String,onlyToday flag:Bool,isMonthly:Bool) -> [NSObject]?{
+        let time = Time()
+        if (isMonthly){
+            let pre = NSKeyedUnarchiver.unarchiveObject(withFile: path)
+            var toReturn:[MonthlyThing] = []
+            if let temp = pre {
+                let monthlyData = temp as! [MonthlyThing]
+                for item in monthlyData{
+                    if item.date == time.getCurrentTime(currentDate: Date()){
+                        toReturn.append(item)
+                    }
+                }
+            }
+            return toReturn
+        }else{
+            let pre = NSKeyedUnarchiver.unarchiveObject(withFile: path)
+            var toReturn:[DailyThing] = []
+            if let temp = pre{
+                let dailyData = temp as! [DailyThing]
+                for item in dailyData{
+                    if item.date == time.getCurrentTime(currentDate: Date()){
+                        toReturn.append(item)
+                    }
+                }
+            }
+            
+            return toReturn
+        }
+        
+    }
 }

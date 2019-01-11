@@ -53,18 +53,18 @@ class TodayTableViewController: UITableViewController {
         
         if (monthlyData.count==0){
             print ("Monthly Data: Load from file")
-            if let preData = dataManager.loadDataFromFile(pathToFile: MonthlyThing.ArchiveURL.path){
+            if let preData = dataManager.loadDataFromFile(pathToFile: MonthlyThing.ArchiveURL.path,onlyToday:true,isMonthly:true){
                 monthlyData = preData as! [MonthlyThing]
             }else{
                 loadDataFromSql()
-                if (monthlyData.count == 0){
-                    let time = Time()
-                    let curTime = time.getCurrentTime(currentDate: Date())
+            }
+            if (monthlyData.count == 0){
+                let time = Time()
+                let curTime = time.getCurrentTime(currentDate: Date())
                     for i in 0...thingData.count-1{
                         monthlyData.append(MonthlyThing(thing: String(i),amount: "0",mail: defaults.string(forKey: "currentMail") ?? "default@mail",date: curTime))
                     }
                 }
-            }
         }
         
         dataManager.saveDataToFile(dataList: monthlyData, pathToFile: MonthlyThing.ArchiveURL.path)

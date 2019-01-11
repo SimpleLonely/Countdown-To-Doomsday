@@ -26,21 +26,22 @@ class DailyTableViewController: UITableViewController {
     
     fileprivate func initData() {
         let dataManager = DataManager(filePath: DailyThing.ArchiveURL.path)
-        if let preData = dataManager.loadDataFromFile(pathToFile: DailyThing.ArchiveURL.path) as? [DailyThing]{
+        if let preData = dataManager.loadDataFromFile(pathToFile: DailyThing.ArchiveURL.path,onlyToday:true,isMonthly:false) as? [DailyThing]{
             dailyData = preData
         }else{
             loadDataFromSql()
-            if (dailyData.count == 0){
-                let time = Time()
+        }
+        if (dailyData.count == 0){
+            let time = Time()
                 for i in 0...questions.count-1{
                     dailyData.append(DailyThing(question: questions[i], answer:"N",mail:defaults.string(forKey: "currentMail") ?? "default@mail",date: time.getCurrentTime(currentDate: Date())))
                     answers.append("N")
                 }
             }
-            dataManager.saveDataToFile(dataList: dailyData, pathToFile: DailyThing.ArchiveURL.path)
-        }
-    }
     
+        dataManager.saveDataToFile(dataList: dailyData, pathToFile: DailyThing.ArchiveURL.path)
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
