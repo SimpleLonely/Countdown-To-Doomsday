@@ -139,8 +139,25 @@ class TodayTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SimpleCell", for: indexPath)
 
+        
         cell.textLabel!.text = thingData[indexPath.row]
-        cell.detailTextLabel!.text = String(monthlyData[indexPath.row].amount)
+        switch indexPath.row {
+        case 0:
+            cell.detailTextLabel!.text = String(monthlyData[indexPath.row].amount)+"升"
+            break
+        case 1:
+            cell.detailTextLabel!.text = String(monthlyData[indexPath.row].amount)+"度"
+            break
+        case 2:
+            cell.detailTextLabel!.text = String(monthlyData[indexPath.row].amount)+"公里"
+            break
+        case 3,4,5:
+            cell.detailTextLabel!.text = String(monthlyData[indexPath.row].amount)+"千克"
+            break
+        default:
+            cell.detailTextLabel!.text = String(monthlyData[indexPath.row].amount)
+        }
+        
         
         return cell
     }

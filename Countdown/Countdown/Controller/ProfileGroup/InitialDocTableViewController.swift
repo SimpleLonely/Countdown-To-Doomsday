@@ -75,22 +75,22 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
             
         }
         
-        details[0].append(tempDetails[0])
-        details[0].append(tempDetails[1])
+        details[0].append(tempDetails[0]+"级")
+        details[0].append(tempDetails[1]+"级")
         
         details[1].append(tempDetails[2])
         
-        details[2].append(tempDetails[3])
-        details[2].append(tempDetails[4])
+        details[2].append(tempDetails[3]+"升")
+        details[2].append(tempDetails[4]+"升")
         
-        details[3].append(tempDetails[5])
-        details[3].append(tempDetails[6])
-        details[3].append(tempDetails[7])
+        details[3].append(tempDetails[5]+"升")
+        details[3].append(tempDetails[6]+"度")
+        details[3].append(tempDetails[7]+"公里")
         
-        details[4].append(tempDetails[8])
-        details[4].append(tempDetails[9])
-        details[4].append(tempDetails[10])
-        details[4].append(tempDetails[11])
+        details[4].append(tempDetails[8]+"千克")
+        details[4].append(tempDetails[9]+"千克")
+        details[4].append(tempDetails[10]+"千克")
+        details[4].append(tempDetails[11]+"千克")
     }
     //更新种类
     func refresh(type: String, indexPath: IndexPath) {
