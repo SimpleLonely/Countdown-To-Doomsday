@@ -31,8 +31,8 @@ class ViewController: UIViewController {
         
         rotate1(imageView: circle, aCircleTime: 10)
         
-        let figure = Figure()
         
+        let figure = Figure()
         
         let result = figure.countDown()
         
@@ -51,13 +51,29 @@ class ViewController: UIViewController {
         let figure = Figure()
         
         let result = figure.countDown()
-        
+        if (QueryService.isAppAlreadyLaunchedOnce()){
+            alert()
+        }
         countDown.text = result+"天"
         
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
     }
-    
+    //Mark:第一次打开的提示
+    func alert (){
+       
+        let alertController = UIAlertController(title: "Tip", message: " 请到设置页，填写您的初始档案", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        let confirmAction = UIAlertAction (title: "Confirm", style: .default,handler:nil)
+        
+        alertController.addAction(cancelAction)
+        
+        alertController.addAction(confirmAction)
+        
+        self.present(alertController,animated: true,completion: nil)
+        
+    }
     
 }
 
