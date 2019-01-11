@@ -34,7 +34,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20年" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFW-BO-Ime">
-                                <rect key="frame" x="182.66666666666666" y="407" width="49" height="26.666666666666686"/>
+                                <rect key="frame" x="182.66666666666666" y="388" width="49" height="26.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -71,11 +71,10 @@
                             <constraint firstItem="JtB-OV-DfJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0Lo-LP-wf2"/>
                             <constraint firstItem="UOp-xH-9ck" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6l6-Wv-ps6"/>
                             <constraint firstItem="hFW-BO-Ime" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="917-0Q-1dT"/>
-                            <constraint firstItem="hFW-BO-Ime" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" symbolic="YES" id="HXj-Ng-m1B"/>
                             <constraint firstItem="Hyi-uf-b5Z" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="J4P-vL-IPQ"/>
                             <constraint firstItem="Hyi-uf-b5Z" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="18" id="KiI-Jz-t7C"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="hFW-BO-Ime" secondAttribute="bottom" constant="302.5" id="M7z-66-Aw2"/>
                             <constraint firstItem="Hyi-uf-b5Z" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Sn8-eI-ust"/>
+                            <constraint firstItem="hFW-BO-Ime" firstAttribute="firstBaseline" secondItem="JtB-OV-DfJ" secondAttribute="baseline" constant="28" symbolType="layoutAnchor" id="Xa4-Vp-ZyE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Vk9-Cd-292" secondAttribute="bottom" constant="91" id="XbP-Xt-cvK"/>
                             <constraint firstItem="JtB-OV-DfJ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="biD-dM-dkk"/>
                             <constraint firstItem="rDX-Mm-c93" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="115" id="f9d-1q-Es3"/>
@@ -83,7 +82,6 @@
                             <constraint firstItem="rDX-Mm-c93" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mEk-aP-PDM"/>
                             <constraint firstItem="Hyi-uf-b5Z" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="18" id="mlZ-QC-1XU"/>
                             <constraint firstItem="UOp-xH-9ck" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="58" id="vn2-vL-2Ga"/>
-                            <constraint firstItem="hFW-BO-Ime" firstAttribute="firstBaseline" secondItem="JtB-OV-DfJ" secondAttribute="baseline" constant="47" id="wss-5a-ooM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
