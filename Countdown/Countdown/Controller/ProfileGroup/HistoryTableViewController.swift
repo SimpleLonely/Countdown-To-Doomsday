@@ -106,7 +106,7 @@ class HistoryTableViewController: UITableViewController {
                     self.historyData = []
                     for item in dataValue{
                         let item = item as! NSDictionary
-                        self.historyData.append(HistoryData(date: time.getCurrentTime(currentDate: Date()), amount: item.value(forKey: "amount") as! String, mail: self.defaults.string(forKey: "currentMail") ?? "default@mail"))
+                        self.historyData.append(HistoryData(date: item.value(forKey: "date") as! String, amount: item.value(forKey: "amount") as! String, mail: self.defaults.string(forKey: "currentMail") ?? "default@mail"))
                         
                     }
                     self.dataManager.saveDataToFile(dataList: self.historyData, pathToFile: HistoryData.ArchiveURL.path)

@@ -153,7 +153,7 @@ class QueryService{
     }
     
     public func getTemperature() -> URLRequest{
-        var components = URLComponents(string: QueryService.baseURL+"get-temperature")!
+        let components = URLComponents(string: QueryService.baseURL+"get-temperature")!
       
         var request = URLRequest (url: components.url!)
         //request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
