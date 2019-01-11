@@ -14,7 +14,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentT: UILabel!
     @IBOutlet weak var countDown: UILabel!
     
-    
     @IBOutlet weak var circle: UIImageView!
     let defaults = UserDefaults.standard
     
