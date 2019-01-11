@@ -20,6 +20,10 @@ class DailyTableViewController: UITableViewController {
     
     var dailyData:[DailyThing] = []
     
+    let defaults = UserDefaults.standard
+    
+    let dataManger = DataManager(filePath: DailyThing.ArchiveURL.path)
+    
     override func viewWillAppear(_ animated: Bool) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
@@ -29,14 +33,22 @@ class DailyTableViewController: UITableViewController {
         
         questions = dict!.object(forKey: "questions") as! [String]
 
-        for i in 0...questions.count-1{
-            dailyData.append(DailyThing(question: questions[i], answer:"N"))
-            answers.append("N")
-        }
         
         let dataManager = DataManager(filePath: DailyThing.ArchiveURL.path)
-        //dailyData = dataManager.loadDataFromFile(pathToFile: DailyThing.ArchiveURL.path) as! [DailyThing]
-        dataManager.saveDataToFile(dataList: dailyData, pathToFile: DailyThing.ArchiveURL.path)
+        if let preData = dataManager.loadDataFromFile(pathToFile: DailyThing.ArchiveURL.path) as? [DailyThing]{
+            dailyData = preData
+        }else{
+            loadDataFromSql()
+            if (dailyData.count == 0){
+                let time = Time()
+                for i in 0...questions.count-1{
+                    dailyData.append(DailyThing(question: questions[i], answer:"N",mail:defaults.string(forKey: "currentMail") ?? "default@mail",date: time.getCurrentTime(currentDate: Date())))
+                    answers.append("N")
+                    }
+            }
+            dataManager.saveDataToFile(dataList: dailyData, pathToFile: DailyThing.ArchiveURL.path)
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -60,8 +72,39 @@ class DailyTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return questions.count
     }
-
     
+    func uploadToSql(question:Int,answer:String){
+        let queryService = QueryService()
+        
+        let time = Time()
+        queryService.httpRequest(request: queryService.updateDailyDataRequest(mail: defaults.string(forKey: "currentMail") ?? "default@mail", date: defaults.string(forKey: "currentDate") ?? time.getCurrentTime(currentDate: Date()),question: question, answer: answer))
+        { (data,error) -> Void in
+            if error != nil {
+                print(error!)
+            } else {
+                print("upload single Daily :",data)
+            }
+        }
+    }
+
+    func loadDataFromSql(){
+        let queryService = QueryService()
+        let time = Time()
+        queryService.httpRequest(request: queryService.getAllDailyDataRequest(mail: defaults.string(forKey: "currentMail") ?? "default@mail", date: defaults.string(forKey: "currentDate") ?? time.getCurrentTime(currentDate: Date())))
+        { (data,error) -> Void in
+            if error != nil {
+                print(error!)
+            } else {
+                let dataAfter = data.data(using: String.Encoding.utf8)
+                let jsonDic = try! JSONSerialization.jsonObject(with: dataAfter!,                                         options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
+                let dataValue = jsonDic.value(forKey: "data") as! NSArray
+                for item in dataValue{
+                    let item = item as! NSDictionary
+                    self.dailyData[item.value(forKey: "question") as! Int].answer = item.value(forKey: "answer") as! String
+                }
+            }
+        }
+    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DailyThings", for: indexPath)
 
@@ -69,7 +112,7 @@ class DailyTableViewController: UITableViewController {
         
         let switchView = UISwitch(frame: .zero)
         
-        let currentAnswer = answers[indexPath.row]
+        let currentAnswer = dailyData[indexPath.row].answer
         
         if (currentAnswer == "Y"){
             switchView.setOn(true,animated: true)
@@ -89,15 +132,12 @@ class DailyTableViewController: UITableViewController {
         //print("table row switch Changed \(sender.tag)")
         //print("The switch is \(sender.isOn ? "ON" : "OFF")")
         
-        answers[sender.tag] = (sender.isOn ? "Y":"N")
+        dailyData[sender.tag].answer = (sender.isOn ? "Y":"N")
         
-        //print (answers[sender.tag])
+        uploadToSql(question: sender.tag, answer: dailyData[sender.tag].answer)
         
-        //TODO: async to sql
+        dataManger.saveDataToFile(dataList: dailyData, pathToFile: DailyThing.ArchiveURL.path)
         
-        dict?.setValue(answers, forKey: "answers")
-        
-        dict?.write(toFile: plistPath!, atomically: true)
         
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

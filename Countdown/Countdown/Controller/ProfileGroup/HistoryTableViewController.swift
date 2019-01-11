@@ -22,7 +22,12 @@ class HistoryTableViewController: UITableViewController {
     
     var historyData = [HistoryData]()
     
+    let defaults = UserDefaults.standard
+    
     @IBOutlet weak var barChartView: BarChartView!
+    
+    let dataManager = DataManager(filePath: HistoryData.ArchiveURL.path)
+    
     
     //设置表格的相关属性
     func setChart(withCount count:Int){
@@ -69,35 +74,74 @@ class HistoryTableViewController: UITableViewController {
         barChartView.data=datas
         
     }
-    override func viewWillAppear(_ animated: Bool) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        plistPath = appDelegate.historyDocPath
-        
-        dict = NSMutableDictionary(contentsOfFile: plistPath)
-        
-        date = dict!.object(forKey: "Date") as! [String]
-        
-        data = dict!.object(forKey: "Data") as! [String]
-        
-        for i in 0...date.count-1{
-            historyData.append(HistoryData(date: date[i], amount: data[i], mail:"default@mail" ))
+    
+    func addItemToSql(data:String){
+        let queryService = QueryService()
+        let time = Time()
+        queryService.httpRequest(request: queryService.addHistoryItemRequest(mail: defaults.string(forKey: "currentMail") ?? "default@mail", date: defaults.string(forKey: "currentDate") ?? time.getCurrentTime(currentDate: Date()),amount:data))
+        { (data,error) -> Void in
+            if error != nil {
+                print(error!)
+            } else {
+                print("add history item:",data)
+            }
+        }}
+    
+    func loadFromSql(){
+        let queryService = QueryService()
+        let time = Time()
+        queryService.httpRequest(request: queryService.getHistoryRequest(mail: defaults.string(forKey: "currentMail") ?? "default@mail"))
+        { (data,error) -> Void in
+            if error != nil {
+                print(error!)
+            } else {
+                let dataAfter = data.data(using: String.Encoding.utf8)
+                let jsonDic = try! JSONSerialization.jsonObject(with: dataAfter!,                                         options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
+                var dataValue = NSArray()
+                if let temp = jsonDic.value(forKey: "data") as? NSArray{
+                    dataValue = temp
+                    self.historyData = []
+                    for item in dataValue{
+                        let item = item as! NSDictionary
+                        self.historyData.append(HistoryData(date: time.getCurrentTime(currentDate: Date()), amount: item.value(forKey: "amount") as! String, mail: self.defaults.string(forKey: "currentMail") ?? "default@mail"))
+                        
+                    }
+                    print("Save TO FILE")
+                    self.dataManager.saveDataToFile(dataList: self.historyData, pathToFile: HistoryData.ArchiveURL.path)
+                }
+            }
         }
- 
         
-        let dataManager = DataManager(filePath: HistoryData.ArchiveURL.path)
-        //historyData = dataManager.loadDataFromFile(pathToFile: HistoryData.ArchiveURL.path) as! [HistoryData]
-        dataManager.saveDataToFile(dataList: historyData, pathToFile: HistoryData.ArchiveURL.path)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if let temp = dataManager.loadDataFromFile(pathToFile: HistoryData.ArchiveURL.path) {
+            historyData =  temp as! [HistoryData]
+        }
+        //print("historyData.count",historyData.count)
         
         setChart(withCount: historyData.count)
-        
-        self.tableView.reloadData()
     }
-    
-    
     
     override func viewDidLoad() {
         
+        
+        if let temp = dataManager.loadDataFromFile(pathToFile: HistoryData.ArchiveURL.path) {
+            historyData =  temp as! [HistoryData]
+        }
+        if historyData.count == 0{
+            loadFromSql()
+            if historyData.count == 0{
+                addItemToSql(data: "0")
+                //print("having load from sql")
+                loadFromSql()
+            }
+        }
+        
+        if let temp = dataManager.loadDataFromFile(pathToFile: HistoryData.ArchiveURL.path) {
+            historyData =  temp as! [HistoryData]
+        }
+        //print("historyData.count",historyData.count)
         
         setChart(withCount: historyData.count)
         

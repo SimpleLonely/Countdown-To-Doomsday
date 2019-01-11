@@ -15,9 +15,6 @@ class TodayTableViewController: UITableViewController {
     
     var thingData:[String] = []
     
-    //TODO: Change to [String] and change below usages
-    var amountData:[Float32] = []
-    
     var tipData:[String] = []
     
     var dict:NSMutableDictionary!
@@ -47,9 +44,7 @@ class TodayTableViewController: UITableViewController {
         
         tipData = dict!.object(forKey: "Tip") as! [String]
         
-        
         let dataManager = DataManager(filePath: MonthlyThing.ArchiveURL.path)
-        
         
         if let preData = dataManager.loadDataFromFile(pathToFile: MonthlyThing.ArchiveURL.path){
             monthlyData = preData as! [MonthlyThing]
@@ -57,50 +52,59 @@ class TodayTableViewController: UITableViewController {
             let time = Time()
             let curTime = time.getCurrentTime(currentDate: Date())
             for i in 0...thingData.count-1{
-                monthlyData.append(MonthlyThing(thing: i,amount: "0",mail: defaults.string(forKey: "currentMail") ?? "default@mail",date: curTime))
+                monthlyData.append(MonthlyThing(thing: String(i),amount: "0",mail: defaults.string(forKey: "currentMail") ?? "default@mail",date: curTime))
             }
         }
         
-
-        if monthlyData == nil || monthlyData[0].amount == "0"{
+        if monthlyData[0].amount == "0"{
             //TODO: load data from sql
-            let queryService = QueryService()
-            queryService.httpRequest(request: queryService.getAllMonthlyDataRequest(mail: defaults.string(forKey: "currentMail") ?? "default@mail", date: defaults.string(forKey: "currentDate") ?? time.getCurrentTime(currentDate: Date())))
-            { (data,error) -> Void in
-                if error != nil {
-                    print(error!)
-                } else {
-                    for item in data{
-                        
-                        //monthlyData[item.date] = item.amount
-                    }
-                    print(data)
-                    
-                }
-            }
+            loadDataFromSql()
             
         }
         dataManager.saveDataToFile(dataList: monthlyData, pathToFile: MonthlyThing.ArchiveURL.path)
         
-        //将本月的数据默认设为历史数据
-        
-        /*amountData[0] = (initialString[5] as NSString).floatValue
-        
-        amountData[1] = (initialString[6] as NSString).floatValue
-        
-        amountData[3] = (initialString[7] as NSString).floatValue
-        
-        dict?.setValue(amountData, forKey: "Amount")
-        
-        dict?.write(toFile: plistPath!, atomically: true)*/
+        for i in 0...monthlyData.count-1{
+            uploadToSql(thingNum: i, amount: monthlyData[i].amount)
+        }
     }
-    
+    func loadDataFromSql(){
+        let queryService = QueryService()
+        queryService.httpRequest(request: queryService.getAllMonthlyDataRequest(mail: defaults.string(forKey: "currentMail") ?? "default@mail", date: defaults.string(forKey: "currentDate") ?? time.getCurrentTime(currentDate: Date())))
+        { (data,error) -> Void in
+            if error != nil {
+                print(error!)
+            } else {
+                let dataAfter = data.data(using: String.Encoding.utf8)
+                let jsonDic = try! JSONSerialization.jsonObject(with: dataAfter!,                                         options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
+                let dataValue = jsonDic.value(forKey: "data") as! NSArray
+                for item in dataValue{
+                    let item = item as! NSDictionary
+                    self.monthlyData[item.value(forKey: "thing") as! Int].amount = item.value(forKey: "amount") as! String
+                }
+            }
+        }
+    }
+    func uploadToSql(thingNum:Int,amount:String){
+        let queryService = QueryService()
+        queryService.httpRequest(request: queryService.updateSingleMonthlyDataRequest(mail: defaults.string(forKey: "currentMail") ?? "default@mail", date: defaults.string(forKey: "currentDate") ?? time.getCurrentTime(currentDate: Date()),thingNum: thingNum, amount: amount))
+        { (data,error) -> Void in
+            if error != nil {
+                print(error!)
+            } else {
+                print("upload single Monthly :",data)
+            }
+        }
+    }
     override func viewDidLoad() {
         
+        thingData = dict!.object(forKey: "Thing") as! [String]
+        
+        tipData = dict!.object(forKey: "Tip") as! [String]
+        
+        loadDataFromSql()
         
         super.viewDidLoad()
 
-        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -108,11 +112,6 @@ class TodayTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        
-        
-        
-    }
  
     // MARK: - Table view data source
 
@@ -141,7 +140,7 @@ class TodayTableViewController: UITableViewController {
         //label2?.text = String (amountData[indexPath.row])
         //let firstArray = notesArray.object(at: 0) as! Array<String>
         cell.textLabel!.text = thingData[indexPath.row]
-        cell.detailTextLabel!.text = String(amountData[indexPath.row])
+        cell.detailTextLabel!.text = String(monthlyData[indexPath.row].amount)
         
         return cell
     }
@@ -187,10 +186,16 @@ class TodayTableViewController: UITableViewController {
         let MT = MonthlyThing.ArchiveURL.path
         
         let dataManager = DataManager(filePath:MT)
-        var data = dataManager.loadDataFromFile(pathToFile: MT) as! [MonthlyThing]
         
-        data[cRow.row].amount = String(toChange)
-        dataManager.saveDataToFile(dataList: data, pathToFile: MT)
+        monthlyData = dataManager.loadDataFromFile(pathToFile: MT) as! [MonthlyThing]
+        
+        monthlyData[cRow.row].amount = String(toChange)
+        
+        dataManager.saveDataToFile(dataList: monthlyData, pathToFile: MT)
+        
+        uploadToSql(thingNum: cRow.row, amount: String(toChange))
+        
+        loadDataFromSql()
         
         self.tableView.reloadData()
         

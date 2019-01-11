@@ -13,6 +13,7 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
     func refresh(type: String, indexPath: IndexPath) {
         details[indexPath.section][indexPath.row] = type
         
+        /*
         var tempDetail:[String] = []
         for row in details{
             for e in row{
@@ -26,7 +27,17 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
         tempDetail = []
         
         dict?.write(toFile: plistPath, atomically: true)
+        */
+        var s=0
         
+        for _ in 0...indexPath.section-1{
+            for _ in 0...details[indexPath.section].count-1{
+                s+=1
+            }
+        }
+        s+=indexPath.row
+        
+        defaults.set(type, forKey: "initialDoc-"+String(s))
         
         self.tableView.reloadData()
         
@@ -46,6 +57,7 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
     
     var plistPath:String = String()
     
+    let defaults = UserDefaults.standard
     
 
     //Declare the monthly things
@@ -78,7 +90,15 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
         titles[4].append(tempString[10])
         titles[4].append(tempString[11])
         
-        let tempDetails = dict!.object(forKey: "Data") as! [String]
+        var tempDetails:[String] = []
+        for i in 0...tempString.count-1{
+            if let cur = defaults.string(forKey: "initialDoc-"+String(i)){
+                tempDetails.append(cur)
+            }
+            else{
+                defaults.set("Wait to be set...", forKey:"initialDoc")
+            }
+        }
         
         details[0].append(tempDetails[0])
         details[0].append(tempDetails[1])
@@ -100,21 +120,16 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
     
     func refresh(level: Int, indexPath: IndexPath) {
         
-        details[indexPath.section][indexPath.row] = String(level)
+        var s=0
         
-        var tempDetail:[String] = []
-        for row in details{
-            for e in row{
-                tempDetail.append(e)
+        for _ in 0...indexPath.section-1{
+            for _ in 0...details[indexPath.section].count-1{
+                s+=1
             }
         }
+        s+=indexPath.row
         
-        dict?.setValue(tempDetail, forKey: "Data")
-        
-        tempDetail = []
-        
-        dict?.write(toFile: plistPath, atomically: true)
-        
+        defaults.set(level, forKey: "initialDoc-"+String(s))
         
         self.tableView.reloadData()
         
@@ -125,25 +140,18 @@ class InitialDocTableViewController: UITableViewController,levelDelegte,typeDele
     //更新所有数据
     func refresh(currentRow indexPath:IndexPath,toChange c:String)
     {
-        // let path = Bundle.main.path(forResource:"MonthlyThingsDataList",ofType:"plist")
+        var s=0
         
-        // let dict = NSDictionary(contentsOfFile: path!)
+        for _ in 0...indexPath.section-1{
+            for _ in 0...details[indexPath.section].count-1{
+                s+=1
+            }
+        }
+        s+=indexPath.row
         
         details[indexPath.section][indexPath.row] = c
         
-        var tempDetail:[String] = []
-        for row in details{
-            for e in row{
-                tempDetail.append(e)
-            }
-        }
-        
-        
-        // let dicString = dict?.allKeys as! [String]
-        
-        dict?.setValue(tempDetail, forKey: "Data")
-        
-        dict?.write(toFile: plistPath, atomically: true)
+        defaults.set(c, forKey: "initialDoc-"+String(s))
         
         self.tableView.reloadData()
         

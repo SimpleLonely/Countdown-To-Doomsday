@@ -24,16 +24,14 @@ class QueryService{
         }
         task.resume()
     }
-    public func getHistoryItemRequest(mail:String,date:String) -> URLRequest{
-        var components = URLComponents(string: QueryService.baseURL+"get-history")!
+    public func getHistoryRequest(mail:String) -> URLRequest{
+        var components = URLComponents(string: QueryService.baseURL+"get-all-history")!
         components.queryItems = [
             URLQueryItem(name: "mail", value: mail),
-            //TODO: add inspector to the date and mail
-            URLQueryItem(name: "date", value: date)
         ]
         var request = URLRequest (url: components.url!)
         //request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.httpMethod = "Get"
+        request.httpMethod = "GET"
         return request
         /*httpRequest(request: request){
             (data, error) -> Void in
@@ -98,7 +96,7 @@ class QueryService{
         return request
     }
     public func updateSingleMonthlyDataRequest(mail:String,date:String,thingNum thing:Int,amount:String ) -> URLRequest{
-        var components = URLComponents(string: QueryService.baseURL+"get-monthly-single-amount")!
+        var components = URLComponents(string: QueryService.baseURL+"update-monthly-single-amount")!
         components.queryItems = [
             URLQueryItem(name: "mail", value: mail),
             //TODO: add inspector to the date and mail
@@ -110,6 +108,51 @@ class QueryService{
         var request = URLRequest (url: components.url!)
         //request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "POST"
+        return request
+    }
+    
+    public func updateDailyDataRequest(mail:String,date:String,question:Int,answer:String) -> URLRequest{
+        var components = URLComponents(string: QueryService.baseURL+"update-answer")!
+        components.queryItems = [
+            URLQueryItem(name: "mail", value: mail),
+            //TODO: add inspector to the date and mail
+            URLQueryItem(name: "date", value: date),
+            URLQueryItem(name:"question",value: String(question)),
+            URLQueryItem(name: "answer", value: answer)
+        ]
+        
+        var request = URLRequest (url: components.url!)
+        //request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+        return request
+    }
+    
+    public func getAllDailyDataRequest(mail:String,date:String) -> URLRequest{
+        var components = URLComponents(string: QueryService.baseURL+"get-all-answer")!
+        components.queryItems = [
+            URLQueryItem(name: "mail", value: mail),
+            //TODO: add inspector to the date and mail
+            URLQueryItem(name: "date", value: date)
+        ]
+        
+        var request = URLRequest (url: components.url!)
+        //request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "GET"
+        return request
+    }
+    
+    public func getSingleDailyDataRequest(mail:String,date:String,question:Int) -> URLRequest{
+        var components = URLComponents(string: QueryService.baseURL+"get-single-answer")!
+        components.queryItems = [
+            URLQueryItem(name: "mail", value: mail),
+            //TODO: add inspector to the date and mail
+            URLQueryItem(name: "date", value: date),
+            URLQueryItem(name: "question", value: String(question))
+        ]
+        
+        var request = URLRequest (url: components.url!)
+        //request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "GET"
         return request
     }
 }

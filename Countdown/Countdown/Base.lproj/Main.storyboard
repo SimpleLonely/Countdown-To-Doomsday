@@ -33,6 +33,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20年" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFW-BO-Ime">
+                                <rect key="frame" x="182.66666666666666" y="407" width="49" height="26.666666666666686"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="倒计时" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JtB-OV-DfJ">
                                 <rect key="frame" x="156.66666666666666" y="348" width="100.99999999999997" height="40"/>
                                 <constraints>
@@ -59,12 +65,6 @@
                                     <segue destination="QoY-A8-VA6" kind="show" id="DWt-yG-pSr"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20年" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFW-BO-Ime">
-                                <rect key="frame" x="182.66666666666666" y="407" width="49" height="26.666666666666686"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -213,6 +213,7 @@
                                 <constraints>
                                     <constraint firstItem="bs9-w2-k1o" firstAttribute="width" secondItem="VzE-Bo-ZPR" secondAttribute="height" multiplier="30:91" id="3IH-Kn-N2s"/>
                                     <constraint firstItem="0H2-mH-q6h" firstAttribute="centerX" secondItem="VzE-Bo-ZPR" secondAttribute="centerX" id="Apc-rw-NGY"/>
+                                    <constraint firstItem="up3-Z8-6hJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="A2h-Cv-ilq" secondAttribute="trailing" constant="8" symbolic="YES" id="ArC-RH-9SZ"/>
                                     <constraint firstItem="bs9-w2-k1o" firstAttribute="centerX" secondItem="VzE-Bo-ZPR" secondAttribute="centerX" id="IP4-St-BQu"/>
                                     <constraint firstItem="up3-Z8-6hJ" firstAttribute="top" secondItem="VzE-Bo-ZPR" secondAttribute="top" constant="237" id="RLc-XG-u1Z"/>
                                     <constraint firstItem="A2h-Cv-ilq" firstAttribute="leading" secondItem="VzE-Bo-ZPR" secondAttribute="leading" constant="79" id="Twf-hU-OyU"/>

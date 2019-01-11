@@ -18,7 +18,7 @@ struct PropertyKeyForMonthlyThing {
 
 class MonthlyThing:NSObject,NSCoding{
     //MARK: the monthly things contains thingName,amount and mail
-    var thing:Int
+    var thing:String
     var amount:String
     var mail:String
     var date:String
@@ -26,7 +26,7 @@ class MonthlyThing:NSObject,NSCoding{
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
     static let ArchiveURL = DocumentsDirectory.appendingPathComponent("monthlyThingsData")
     
-    init(thing:Int,amount:String,mail:String,date:String) {
+    init(thing:String,amount:String,mail:String,date:String) {
         self.thing = thing
         self.amount = amount
         self.mail = mail
@@ -40,11 +40,10 @@ class MonthlyThing:NSObject,NSCoding{
     }
     required convenience init?(coder aDecoder: NSCoder) {
         
-        guard let thing = aDecoder.decodeObject(forKey: PropertyKeyForMonthlyThing.thing) as? Int else {
+        guard let thing = aDecoder.decodeObject(forKey: PropertyKeyForMonthlyThing.thing) as? String else {
             os_log("Unable to decode the name for a MonthlyThing object.", log: OSLog.default, type: .debug)
             return nil
         }
-        
         guard let amount = aDecoder.decodeObject(forKey: PropertyKeyForMonthlyThing.amount) as? String else {
             os_log("Unable to decode the amount for a MonthlyThing object.", log: OSLog.default, type: .debug)
             return nil
